@@ -99,17 +99,7 @@ def sidebarhome(request,company_id=0):
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
 		context = {
-			'individual':p,
-			'campany1':1111111,
-			'campany2':1111111,
-			'campany3':1111111,
-			'campany4':1111111,
-			'campany5':1111111,
-			'campany6':1111111,
-			'campany7':1111111,
-			'campany8':1111111,
-			'campany9':1111111,
-			'campany10':1111111
+			'individual':p
 		}
 	return render(request, 'home.html', context) 
 
