@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% block content %} 
+{% load staticfiles %}
+{% include 'sidebarhome.html' %}
+<div class="mainbar">
+	<style>	
+th, td {
+    padding: 15px;
+}
+img{
+  border: none;
+}
+h3 {
+	font: 18px Arial, Helvetica, sans-serif;	
+	margin: 0px;
+}
+h3 small{
+	font: 18px Arial, Helvetica, sans-serif;
+	margin: 0px;
+	color:#08722A;
+
+}
+h3 big{
+	font: 18px Arial, Helvetica, sans-serif;
+	margin: 0px;
+	color:#721608;
+
+}
+</style>
+<h1>Nepse Index Analysis </h1>
+<div class="row">
+    <div class="col-sm-6">
+	  <div class="row-sm-6">
+		  <p><h5>highest stock price for this company{{individual.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>Average stock price for this company{{individual.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>Lowest stock price for this company{{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <p><h5>Predicted Nepse Index as of {{q1.date}}: </h5>
+		{% if query.increased_bool %}
+		<h3><small> {{q1.predicted_index}}</small></h3>
+		{% else %}
+		<h3> <big>{{q1.predicted_index}}</big></h3>
+		{% endif %}
+      </p>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price for GOOG  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price for TWTR  {{campany2}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price for AMZN  {{campany3}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price for FB  {{campany4}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price for YHOO {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+	  <div class="row-sm-6">
+		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+      </div>
+
+    </div>
+	
+
+</div>
+
+
+
+</div>
+<div class="clr"></div>
+
+
+
+
+{% endblock %}
