@@ -355,18 +355,22 @@ def ann_predict(tbl, predict_range=30):
 
 def svm_predict(tbl, predict_range):
     table = get_data_db(tbl)
+    date = zip(*table)[0]
+    date = date[1:len(date)-1]
     close = zip(*table)[1]
     close = np.asarray(map(float,close[0:len(close)-1]))
     result = predict_svm(close, predict_range)
-    return result
+    return result, date
 
 def regression_predict(tbl, predict_range):
     table = get_data_db(tbl)
+    date = zip(*table)[0]
+    date = date[1:len(date)-1]
     close = zip(*table)[1]
     close = np.asarray(map(float,close[0:len(close)-1]))
     result = predict_regression(close,predict_range)
     
-    return result
+    return result,close[len(close)-1], date[len(date)-1],date[len(date)-2]
 
 if __name__ == '__main__':
     stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']

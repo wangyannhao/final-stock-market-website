@@ -31,18 +31,19 @@ h3 big{
 
 </style>
 <div class="mainbar">
-{% if individual %}
-<h1>{{individual.name}}({{individual.abbr}})</h1>
+
+{% if pred %}
+<h1>{{company_name.0}}({{company_name.1}})</h1>
 <div class="row">
     <div class="col-sm-6">
-      <p><h5>Closed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{Result}}</h3></p>    
+      <p><h5>Closed price of {{company_name.1}} as of {{today}}: </h5> <h3> {{last}}</h3></p>    
     </div>
     <div class="col-sm-6">
-      <p><h5>Predicted Close Price as of {{date}}: </h5>
-        {% if individual.increased_bool %}
-        <h3><small> {{individual.predicted_price}}</small></h3>
+      <p><h5>Predicted Close Price as of {{tomorrow}}: </h5>
+        {% if delta %}
+        <h3><small> {{pred}}</small></h3>
         {% else %}
-        <h3> <big>{{individual.predicted_price}}</big></h3>
+        <h3> <big>{{pred}}</big></h3>
         {% endif %}
       </p>
     </div>

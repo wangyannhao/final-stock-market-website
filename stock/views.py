@@ -15,6 +15,18 @@ from decimal import Decimal
 from retrieve_data_update import regression_predict as predict
 #from .stock import neuralNetwork
 
+company =  {28:['GOOG','Google'],
+			29:'TWTR',
+			30:'AMZN',
+			31:'FB',
+			32:'YHOO',
+			33:'AAPL',
+			34:'GPRO',
+			35:'INTC',
+			36:'NFLX',
+			37:'TSLA'
+		}
+
 def analysis(request):
 	data.bank_data.reverse()
 	data.devbank_data.reverse()
@@ -45,13 +57,21 @@ def sidebar(request,company_id=0):
 		}
 	else:
 		c_id = int (company_id)
-		p = Company.objects.get(pk=company_id) 
-		result = predict("AMZN_historical",15)
+		p = Company.objects.get(pk=company_id)
+		print company[c_id][0]
+		pred, last, tomorrow, today = predict(company[c_id][0]+"_historical",15)
+		if (pred-last>0): 
+			delta = 1
+		else: 
+			delta = 0
 		context = {
+			'company_name':company[c_id],
 			'individual':p,
-			'date': "2017-5-12",
-			'Result':result
-
+			'today': today,
+			'pred':pred,
+			'last':last,
+			'tomorrow':tomorrow,
+			'delta': delta
 		}
 	return render(request, 'prediction.html', context) 
 
