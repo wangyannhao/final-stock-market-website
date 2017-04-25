@@ -50,7 +50,7 @@ h2 {
 	color:#323a3f;
 }
 h6 a{
-	color:#d76002;
+	color:#000000;
 	padding: 0;
 	margin: 0px;
 }
@@ -86,7 +86,7 @@ a.rm, a.com {
 	width:890px;
 }
 .header {
-	background:#1c1c1c;
+	background:#ee7600;
 	height:98px;
 }
 .header_resize {
@@ -102,7 +102,7 @@ a.rm, a.com {
 	margin:0;
 	padding:25px 0 0 20px;
 	float:right;
-	width:400px;
+	width:1000px;
 }
 .menu_nav ul {
 	list-style:none;
@@ -117,13 +117,13 @@ a.rm, a.com {
 	display:block;
 	margin:0;
 	padding:12px 13px;
-	color:#7b7a7a;
+	color:#ffffff;
 	text-decoration:none;
-	font-size:13px;
+	font-size:16px;
 }
 .menu_nav ul li.active a, .menu_nav ul li a:hover {
 	font-weight:bold;
-	color:#e58a42;
+	color:#ffffff;
 }
 .content {
 	margin-bottom:12px;
@@ -141,7 +141,7 @@ a.rm, a.com {
 }
 .mainbar img {
 	padding:4px;
-	border:1px solid #ffffff;
+	border:1px solid #trebuchet ms;
 	background-color:#fff;
 }
 .mainbar img.fl {
@@ -254,7 +254,7 @@ ul.ex_menu li a:hover {
 }
 .footer {
 	color:#959595;
-	background-color:#242424;
+	background-color:#ee7600;
 }
 .footer_resize {
 	margin:0 auto;

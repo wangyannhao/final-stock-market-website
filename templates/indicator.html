@@ -1,0 +1,448 @@
+{% extends 'index.html' %}
+{% block navigation %} 
+		  <li><a href="{% url 'home1' %}">Home</a></li>
+          <li><a href="{% url 'prediction' 28 %}">Prediction</a></li>
+          <li class="active"><a href="{% url 'indicator' 28 %}">Indicator</a></li>
+          <li><a href="{% url 'khatra' %}">Analysis</a></li>
+{% endblock %}
+{% block content %} 
+{% load staticfiles %}
+{% include 'sidebarIndicator.html' %}
+
+<style>
+th, td {
+    padding: 15px;
+}
+h3{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+}
+ h3 small{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#08722A;
+
+}
+h3 big{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#721608;
+}
+
+</style>
+
+
+<div class="mainbar">
+{% if individual %}
+<h1>{{individual.name}}({{individual.abbr}})</h1>
+
+
+<script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="{% static 'js/dataloader.min.js' %}"></script>
+    <style>
+    body, html {
+      font-family: Verdana;
+      font-size: 12px;
+    }
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+
+<script>
+    var id = {{individual.id}};
+    if(id == 28){var urls1 = "{% static 'js/indicator/GOOG1.csv' %}";}
+    else if(id == 29 ){var urls1 = "{% static 'js/indicator/TWTR1.csv' %}";}
+    else if(id == 30){var urls1 = "{% static 'js/indicator/AMZN1.csv' %}";}
+    else if(id == 31){var urls1 = "{% static 'js/indicator/FB1.csv' %}";}
+    else if(id == 32){var urls1 = "{% static 'js/indicator/YHOO1.csv' %}";}
+    
+    var chart = AmCharts.makeChart("chartdiv", {
+     "type": "serial",
+      "dataLoader": {
+      	
+      	"url":urls1,
+        "format": "csv",
+        "delimiter":',',
+        "useColumnNames":true,
+        "skip":1,
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart.dataProvider[ 0 ] ) {
+            if ( chart.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart.categoryField ) {
+              var graph = new AmCharts.AmGraph();
+              graph.valueField = key;
+              graph.type = "line";
+              graph.title = key,
+              graph.lineThickness = 2;
+              chart.addGraph( graph );
+            }
+          }
+        }
+    
+      },
+
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Date",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+</script>
+
+<script>
+    var id = {{individual.id}};
+    if(id == 28){var urls2 = "{% static 'js/indicator/GOOG2.csv' %}";}
+    else if(id == 29 ){var urls2 = "{% static 'js/indicator/TWTR2.csv' %}";}
+    else if(id == 30){var urls2 = "{% static 'js/indicator/AMZN2.csv' %}";}
+    else if(id == 31){var urls2 = "{% static 'js/indicator/FB2.csv' %}";}
+    else if(id == 32){var urls2 = "{% static 'js/indicator/YHOO2.csv' %}";}
+    
+    var chart1 = AmCharts.makeChart("chartdiv1", {
+     "type": "serial",
+      "dataLoader": {
+        
+        "url":urls2,
+        "format": "csv",
+        "delimiter":',',
+        "useColumnNames":true,
+        "skip":1,
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart1.dataProvider[ 0 ] ) {
+            if ( chart1.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart1.categoryField ) {
+              var graph1 = new AmCharts.AmGraph();
+              graph1.valueField = key;
+              graph1.type = "line";
+              graph1.title = key,
+              graph1.lineThickness = 2;
+              chart1.addGraph( graph1 );
+            }
+          }
+        }
+    
+      },
+
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Date",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+</script>
+
+<script>
+    var id = {{individual.id}};
+    if(id == 28){var urls3 = "{% static 'js/indicator/GOOG_rsi.csv' %}";}
+    else if(id == 29 ){var urls3 = "{% static 'js/indicator/TWTR_rsi.csv' %}";}
+    else if(id == 30){var urls3 = "{% static 'js/indicator/AMZN_rsi.csv' %}";}
+    else if(id == 31){var urls3 = "{% static 'js/indicator/FB_rsi.csv' %}";}
+    else if(id == 32){var urls3 = "{% static 'js/indicator/YHOO_rsi.csv' %}";}
+    
+    var chart2 = AmCharts.makeChart("chartdiv2", {
+     "type": "serial",
+      "dataLoader": {
+        
+        "url":urls3,
+        "format": "csv",
+        "delimiter":',',
+        "useColumnNames":true,
+        "skip":1,
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart2.dataProvider[ 0 ] ) {
+            if ( chart2.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart2.categoryField ) {
+              var graph2 = new AmCharts.AmGraph();
+              graph2.valueField = key;
+              graph2.type = "line";
+              graph2.title = key,
+              graph2.lineThickness = 2;
+              chart2.addGraph( graph2 );
+            }
+          }
+        }
+    
+      },
+
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Date",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+</script>
+
+<script>
+    var id = {{individual.id}};
+    if(id == 28){var urls4 = "{% static 'js/indicator/GOOG_dmi.csv' %}";}
+    else if(id == 29 ){var urls4 = "{% static 'js/indicator/TWTR_dmi.csv' %}";}
+    else if(id == 30){var urls4 = "{% static 'js/indicator/AMZN_dmi.csv' %}";}
+    else if(id == 31){var urls4 = "{% static 'js/indicator/FB_dmi.csv' %}";}
+    else if(id == 32){var urls4 = "{% static 'js/indicator/YHOO_dmi.csv' %}";}
+    
+    var chart3 = AmCharts.makeChart("chartdiv3", {
+     "type": "serial",
+      "dataLoader": {
+        
+        "url":urls4,
+        "format": "csv",
+        "delimiter":',',
+        "useColumnNames":true,
+        "skip":1,
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart3.dataProvider[ 0 ] ) {
+            if ( chart3.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart3.categoryField ) {
+              var graph3 = new AmCharts.AmGraph();
+              graph3.valueField = key;
+              graph3.type = "line";
+              graph3.title = key,
+              graph3.lineThickness = 2;
+              chart3.addGraph( graph3 );
+            }
+          }
+        }
+    
+      },
+
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Date",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+</script>
+
+
+    <h5><b>Indicator: Bollinger bands</b></h5>
+    <div id="chartdiv" style="width:100%; height:400px;"></div>
+    <h8><center>Fig1 : Charts showing price, MA, upper and low of {{individual.name}} </center> </h8>
+    <p>
+    <div id="chartdiv1" style="width:100%; height:400px;"></div>
+    <h8><center>Fig2 : Charts showing b and BW of {{individual.name}} </center> </h8>
+    <p>
+    <h5><b>Indicator: Relative Strength Index</b></h5>
+    <div id="chartdiv2" style="width:100%; height:400px;"></div>
+    <h8><center>Fig3 : Charts showing rsi of {{individual.name}} </center> </h8>
+    <p>
+    <h5><b>Indicator: Directional Movement Index</b></h5>
+    <div id="chartdiv3" style="width:100%; height:400px;"></div>
+    <h8><center>Fig4 : Charts showing ADX, +DI and -DI of {{individual.name}} </center> </h8>
+    <p>
+
+
+{% endif%}
+
+</div>
+
+{% endblock %}

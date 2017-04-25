@@ -35,19 +35,22 @@ def home(request):
 	context={
 	#'q2':object_old,
 	'q1': object_recent,
-	'neps_data':data1.neps_data
+	'neps_data':data1.neps_data,
+	'campany1':1111111,
+	'campany2':1111111,
+	'campany3':1111111,
+	'campany4':1111111,
+	'campany5':1111111,
+	'campany6':1111111,
+	'campany7':1111111,
+	'campany8':1111111,
+	'campany9':1111111,
+	'campany10':1111111
+
 	}
 	
 	return render(request, 'home1.html', context) 
 
-def make_nepse_prediction(list_data):
-	nepse_prediction = []
-	nepse_prediction = analyzer.analyzeId(0)
-	nep_price = Nepse( predicted_index= nepse_prediction[0], previous_index = list_data[0][0], difference= index- predicted_index)	
-	
-	if ((nep_price.predicted_index - nep_price.previous_index)>0):
-		nep_price.increased_bool = True 
-	nep_price.save()
 
 def analysis(request):
 	data.bank_data.reverse()
@@ -80,15 +83,25 @@ def sidebar(request,company_id=0):
 		}
 	else:
 		c_id = int (company_id)
-		
-		#c.difference = c.closing_price - c.predicted_price
-		#make_company_prediction(c_id)	
 		p = Company.objects.get(pk=company_id) 
-		#c = Company.objects.all().order_by('-date').filter(abbr__exact = p.abbr)
 		context = {
 			'individual':p
 		}
 	return render(request, 'prediction.html', context) 
+
+def indicator(request,company_id=0):
+	if(company_id==0):
+
+		context={
+
+		}
+	else:
+		c_id = int (company_id)
+		p = Company.objects.get(pk=company_id) 
+		context = {
+			'individual':p
+		}
+	return render(request, 'indicator.html', context) 
 
 def make_company_prediction(c_id):
 	close_prediction = []
@@ -100,24 +113,3 @@ def make_company_prediction(c_id):
 		cls_price.increased_bool = True 
 	cls_price.save()
 
-def previous_prediction(request,company_id):
-	p = Company.objects.get(pk=company_id)
-	pre = Company.objects.all().order_by('-date').filter(abbr__exact = p.abbr)
-	context = {
-		'query':pre,
-		'given':p
-	}
-	return render(request, 'previous_prediction.html', context) 
-
-def previous_nepse_prediction(request):
-	pre = Nepse.objects.all().order_by('-date')
-	context = {
-		'query':pre
-	}
-	return render(request, 'previous_nepse_prediction.html', context) 
-
-def about(request):
-	context = {
-		
-	}
-	return render(request, 'about.html', context) 

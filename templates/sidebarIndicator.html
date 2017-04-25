@@ -1,0 +1,36 @@
+{% load staticfiles %}
+{% block sidebar %}
+<div class="sidebar" >
+<style type="text/css">
+	h6 a{
+	color:#d76002;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-top: 0px;
+	margin: 0px;
+	}
+	span{
+		color:#d76002;
+	}
+	.star{
+		margin-bottom: 30px;
+		margin-top: 20px;
+	}
+	ul li{
+		padding: 0px;
+		margin: 0px;
+		color:#d76002;
+	}
+
+</style>
+	<h2 class="star" style="padding:10px 20px 10px 20px;">Companies</h2>
+        <div class="gadget">
+          	<h6><a href="{% url 'indicator' 28 %}" >GOOG</a></h6><br>
+			<h6><a href="{% url 'indicator' 29 %}" >TWTR</a></h6><br>
+			<h6><a href="{% url 'indicator' 30 %}" >AMZN</a></h6><br>
+			<h6><a href="{% url 'indicator' 31 %}" >FB</a></h6><br>
+			<h6><a href="{% url 'indicator' 32 %}" >YHOO</a></h6><br>
+		
+        </div>
+  </div>
+{% endblock %}

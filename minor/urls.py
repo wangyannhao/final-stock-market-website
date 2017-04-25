@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-from stock.views import home, analysis, sidebar,previous_prediction, previous_nepse_prediction, about#, details2, details3, details4o
+from stock.views import home, analysis, sidebar , indicator
 import settings
 
 urlpatterns = [
@@ -25,13 +25,9 @@ urlpatterns = [
     url(r'^$', home, name='home1'),
     url(r'^analysis/', analysis, name='khatra'),
     url(r'^prediction/(?P<company_id>[0-9]+)$', sidebar, name ='prediction'),
-    url(r'^previous_prediction/(?P<company_id>[0-9]+)$', previous_prediction, name ='previous_prediction'),
-    url(r'^previous_nepse_prediction/', previous_nepse_prediction, name ='previous_nepse_prediction'),
-    # url(r'^adb/', details2, name='adblana'),
-    # url(r'^plic/', details3, name='plicanalysis'),
-    # url(r'^nlic/', details4, name='nlicanalysis'),
+    url(r'^indicator/(?P<company_id>[0-9]+)$', indicator, name ='indicator'),
+    url(r'^indicator/',indicator,name='indicator'),
     url(r'^prediction/', sidebar, name='prediction'),
-    url(r'^about/', about, name='about'),
 ]
 if settings.DEBUG:
     urlpatterns += (
