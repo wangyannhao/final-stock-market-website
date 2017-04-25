@@ -15,43 +15,6 @@ from decimal import Decimal
 
 #from .stock import neuralNetwork
 
-def home(request):
-	conn = sqlite3.connect('nepse_only.sqlite3')
-	c = conn.cursor()  
-	def read_form_db():
-		c.execute('SELECT * FROM alldata')    
-		data=c.fetchall()
-		return (data)
-	list_data = read_form_db()
-	list_data.reverse()
-	data1.neps_data.reverse()
-	#make_nepse_prediction(list_data)
-	c = Nepse.objects.all()
-	#c.difference = c.index - c.predicted_index
-
-	object_recent = Nepse.objects.order_by('-date')[0]
-	#print (object_recent)
-	#object_old = Nepse.objects.order_by('-date')[1:3]
-	context={
-	#'q2':object_old,
-	'q1': object_recent,
-	'neps_data':data1.neps_data,
-	'campany1':1111111,
-	'campany2':1111111,
-	'campany3':1111111,
-	'campany4':1111111,
-	'campany5':1111111,
-	'campany6':1111111,
-	'campany7':1111111,
-	'campany8':1111111,
-	'campany9':1111111,
-	'campany10':1111111
-
-	}
-	
-	return render(request, 'home1.html', context) 
-
-
 def analysis(request):
 	data.bank_data.reverse()
 	data.devbank_data.reverse()
@@ -74,7 +37,6 @@ def analysis(request):
 	return render(request, 'khatra.html', context)	 
 
 
-
 def sidebar(request,company_id=0):
 	if(company_id==0):
 
@@ -89,6 +51,31 @@ def sidebar(request,company_id=0):
 		}
 	return render(request, 'prediction.html', context) 
 
+def homeindex(request,company_id=28):
+	if(company_id==0):
+
+		context={
+
+		}
+	else:
+		c_id = int (company_id)
+		p = Company.objects.get(pk=company_id) 
+		context = {
+			'individual':p,
+			'campany1':1111111,
+			'campany2':1111111,
+			'campany3':1111111,
+			'campany4':1111111,
+			'campany5':1111111,
+			'campany6':1111111,
+			'campany7':1111111,
+			'campany8':1111111,
+			'campany9':1111111,
+			'campany10':1111111
+		}
+	return render(request, 'home.html', context) 
+
+
 def sidebarhome(request,company_id=0):
 	if(company_id==0):
 
@@ -99,7 +86,17 @@ def sidebarhome(request,company_id=0):
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
 		context = {
-			'individual':p
+			'individual':p,
+			'campany1':1111111,
+			'campany2':1111111,
+			'campany3':1111111,
+			'campany4':1111111,
+			'campany5':1111111,
+			'campany6':1111111,
+			'campany7':1111111,
+			'campany8':1111111,
+			'campany9':1111111,
+			'campany10':1111111
 		}
 	return render(request, 'home.html', context) 
 
