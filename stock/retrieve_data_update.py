@@ -184,8 +184,8 @@ def collect_data():
 def get_data_db(table):
     mydb = MySQLdb.connect(host = 'localhost',
        user='root',
-       passwd='123456',
-       db='sys')
+       passwd='93112525',
+       db='test')
     cursor = mydb.cursor()
     cursor.execute("SELECT * from "+table)
     tbl = cursor.fetchall()

@@ -18,7 +18,6 @@ class Company(models.Model):
 	yesterday_date = models.DateField(auto_now_add = True, auto_now = False)
 	previous_closing_price = models.IntegerField(default = 0)
 	increased_bool = models.BooleanField(default = False)
-	
 	def __str__(self):
 		return self.abbr
 

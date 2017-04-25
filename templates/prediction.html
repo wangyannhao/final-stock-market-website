@@ -29,16 +29,16 @@ h3 big{
   color:#721608;
 }
 
-  </style>
+</style>
 <div class="mainbar">
 {% if individual %}
 <h1>{{individual.name}}({{individual.abbr}})</h1>
 <div class="row">
     <div class="col-sm-6">
-      <p><h5>Closed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{individual.previous_closing_price}}</h3></p>    
+      <p><h5>Closed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{Result}}</h3></p>    
     </div>
     <div class="col-sm-6">
-      <p><h5>Predicted Close Price as of {{individual.date}}: </h5>
+      <p><h5>Predicted Close Price as of {{date}}: </h5>
         {% if individual.increased_bool %}
         <h3><small> {{individual.predicted_price}}</small></h3>
         {% else %}

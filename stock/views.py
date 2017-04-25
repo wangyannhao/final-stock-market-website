@@ -12,7 +12,7 @@ from .models import Nepse
 from . import analyzer
 import json_, sqlite3
 from decimal import Decimal
-
+from retrieve_data_update import regression_predict as predict
 #from .stock import neuralNetwork
 
 def analysis(request):
@@ -46,8 +46,12 @@ def sidebar(request,company_id=0):
 	else:
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
+		result = predict("AMZN_historical",15)
 		context = {
-			'individual':p
+			'individual':p,
+			'date': "2017-5-12",
+			'Result':result
+
 		}
 	return render(request, 'prediction.html', context) 
 
