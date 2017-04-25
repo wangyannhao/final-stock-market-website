@@ -194,6 +194,7 @@ def get_data_db(table):
 def getAverage(data):
     sum = 0.0
     for i in range(len(data)-1):
+        # print i  
         try:
             sum = sum + float(data[i][2])
         except ValueError,e:

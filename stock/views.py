@@ -12,19 +12,19 @@ from .models import Nepse
 from . import analyzer
 import json_, sqlite3
 from decimal import Decimal
-from retrieve_data_update import regression_predict as predict
+import retrieve_data_update as rdu
 #from .stock import neuralNetwork
 
 company =  {28:['GOOG','Google'],
-			29:'TWTR',
-			30:'AMZN',
-			31:'FB',
-			32:'YHOO',
-			33:'AAPL',
-			34:'GPRO',
-			35:'INTC',
-			36:'NFLX',
-			37:'TSLA'
+			29:['TWTR','Twitte'],
+			30:['AMZN','Amazon'],
+			31:['FB','facebook'],
+			32:['YHOO','Yahoo'],
+			33:['AAPL', 'Apple'],
+			34:['GPRO', 'Go Pro'],
+			35:['INTC', 'Intc'],
+			36:['NFLX', 'Netflix'],
+			37:['TSLA', 'Tesla']
 		}
 
 def analysis(request):
@@ -59,7 +59,7 @@ def sidebar(request,company_id=0):
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id)
 		print company[c_id][0]
-		pred, last, tomorrow, today = predict(company[c_id][0]+"_historical",15)
+		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",15)
 		if (pred-last>0): 
 			delta = 1
 		else: 
@@ -86,16 +86,6 @@ def homeindex(request,company_id=28):
 		p = Company.objects.get(pk=company_id) 
 		context = {
 			'individual':p,
-			'campany1':1111111,
-			'campany2':1111111,
-			'campany3':1111111,
-			'campany4':1111111,
-			'campany5':1111111,
-			'campany6':1111111,
-			'campany7':1111111,
-			'campany8':1111111,
-			'campany9':1111111,
-			'campany10':1111111
 		}
 	return render(request, 'home.html', context) 
 
@@ -109,18 +99,10 @@ def sidebarhome(request,company_id=0):
 	else:
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
+		query(company[c_id][0]) 
 		context = {
 			'individual':p,
-			'campany1':1111111,
-			'campany2':1111111,
-			'campany3':1111111,
-			'campany4':1111111,
-			'campany5':1111111,
-			'campany6':1111111,
-			'campany7':1111111,
-			'campany8':1111111,
-			'campany9':1111111,
-			'campany10':1111111
+
 		}
 	return render(request, 'home.html', context) 
 
@@ -148,3 +130,10 @@ def make_company_prediction(c_id):
 		cls_price.increased_bool = True 
 	cls_price.save()
 
+def query(name):
+	tbl = rdu.get_data_db(name+'_historical')
+	avg = rdu.getAverage(tbl)
+	low = rdu.getLowest(tbl)
+	high = rdu.getHighest(tbl)
+	companies = rdu.getCompanies(name+'_historical')
+	print avg, high, low, companies

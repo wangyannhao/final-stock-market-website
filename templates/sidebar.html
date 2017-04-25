@@ -9,9 +9,11 @@
 	padding-top: 0px;
 	margin: 0px;
 	}
-	.star{
+	.list-group{
 		margin-bottom: 30px;
 		margin-top: 20px;
+		padding-right: 10px;
+
 	}
 	ul li{
 		padding: 0px;
@@ -20,19 +22,33 @@
 	}
 
 </style>
-	<h2 class="star" style="padding:10px 20px 10px 20px;">Companies</h2>
-        <div class="gadget">
-          	<h6><a href="{% url 'prediction' 28 %}" >GOOG</a></h6><br>
+
+	<h2 class="list-group" style="padding:10px 20px 10px 20px; font-weight: 700">Stock</h2>
+        <!-- <div class="gadget"> -->
+<!--           	<h6><a href="{% url 'prediction' 28 %}" >GOOG</a></h6><br>
 			<h6><a href="{% url 'prediction' 29 %}" >TWTR</a></h6><br>
 			<h6><a href="{% url 'prediction' 30 %}" >AMZN</a></h6><br>
 			<h6><a href="{% url 'prediction' 31 %}" >FB</a></h6><br>
-			<h6><a href="{% url 'prediction' 32 %}" >YHOO</a></h6><br>
-			<h6><a href="{% url 'prediction' 33 %}" >AAPL</a></h6><br>
-			<h6><a href="{% url 'prediction' 34 %}" >GPRO</a></h6><br>
-			<h6><a href="{% url 'prediction' 35 %}" >INTC</a></h6><br>
-			<h6><a href="{% url 'prediction' 36 %}" >NFLX</a></h6><br>
-			<h6><a href="{% url 'prediction' 37 %}" >TSLA</a></h6><br>
+			<h6><a href="{% url 'prediction' 32 %}" >YHOO</a></h6><br> -->
 		
-        </div>
+        <!-- </div> -->
+  <li class="list-group-item"><a href="{% url 'prediction' 28 %}" >GOOG</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 29 %}" >TWTR</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 30 %}" >AMZN</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 31 %}" >FB</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 32 %}" >YHOO</a></li>
+ 
+  <li class="list-group-item"><a href="{% url 'prediction' 33 %}" >GOOG</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 34 %}" >TWTR</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 35 %}" >AMZN</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 36 %}" >FB</a></li>
+  <li class="list-group-item"><a href="{% url 'prediction' 37 %}" >YHOO</a></li>
   </div>
 {% endblock %}
+<!-- <ul class="list-group">
+  <li class="list-group-item">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item">Morbi leo risus</li>
+  <li class="list-group-item">Porta ac consectetur ac</li>
+  <li class="list-group-item">Vestibulum at eros</li>
+</ul> -->

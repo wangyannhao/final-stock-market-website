@@ -9,12 +9,11 @@
 	padding-top: 0px;
 	margin: 0px;
 	}
-	span{
-		color:#d76002;
-	}
-	.star{
+	.list-group{
 		margin-bottom: 30px;
 		margin-top: 20px;
+		padding-right: 10px;
+
 	}
 	ul li{
 		padding: 0px;
@@ -23,19 +22,20 @@
 	}
 
 </style>
-	<h2 class="star" style="padding:10px 20px 10px 20px;">Companies</h2>
-        <div class="gadget">
-          	<h6><a href="{% url 'home' 28 %}" >GOOG</a></h6><br>
-			<h6><a href="{% url 'home' 29 %}" >TWTR</a></h6><br>
-			<h6><a href="{% url 'home' 30 %}" >AMZN</a></h6><br>
-			<h6><a href="{% url 'home' 31 %}" >FB</a></h6><br>
-			<h6><a href="{% url 'home' 32 %}" >YHOO</a></h6><br>
-			<h6><a href="{% url 'home' 33 %}" >AAPL</a></h6><br>
-			<h6><a href="{% url 'home' 34 %}" >GPRO</a></h6><br>
-			<h6><a href="{% url 'home' 35 %}" >INTC</a></h6><br>
-			<h6><a href="{% url 'home' 36 %}" >NFLX</a></h6><br>
-			<h6><a href="{% url 'home' 37 %}" >TSLA</a></h6><br>
+
+	<h2 class="list-group" style="padding:10px 20px 10px 20px; font-weight: 700">Stock</h2>
+        <!-- <div class="gadget"> -->
+          	<li class="list-group-item"><a href="{% url 'home' 28 %}" >GOOG</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 29 %}" >TWTR</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 30 %}" >AMZN</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 31 %}" >FB</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 32 %}" >YHOO</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 33 %}" >AAPL</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 34 %}" >GPRO</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 35 %}" >INTC</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 36 %}" >NFLX</a></li><br>
+			<li class="list-group-item"><a href="{% url 'home' 37 %}" >TSLA</a></li><br>
 		
-        </div>
+        <!-- </div> -->
   </div>
 {% endblock %}
