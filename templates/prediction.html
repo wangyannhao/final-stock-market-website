@@ -1,0 +1,201 @@
+{% extends 'index.html' %}
+{% block navigation %} 
+		  <li><a href="{% url 'home1' %}">Home</a></li>
+          <li><a href="{% url 'khatra' %}">Analysis</a></li>
+          <li class="active"><a href="{% url 'prediction' %}">Prediction</a></li>
+          <li ><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+{% block content %} 
+{% load staticfiles %}
+{% include 'sidebar.html' %}
+
+<style>
+th, td {
+    padding: 15px;
+}
+h3{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+}
+ h3 small{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#08722A;
+
+}
+h3 big{
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#721608;
+}
+
+a {
+  text-decoration: underline;
+}
+  </style>
+<div class="mainbar">
+{% if individual %}
+<h1>{{individual.name}}({{individual.abbr}})</h1>
+<div class="row">
+    <div class="col-sm-6">
+      <p><h5>CLosed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{individual.previous_closing_price}}</h3></p>    
+    </div>
+    <div class="col-sm-6">
+      <p><h5>Predicted Close Price as of {{individual.date}}: </h5>
+        {% if individual.increased_bool %}
+        <h3><small> {{individual.predicted_price}}</small></h3>
+        {% else %}
+        <h3> <big>{{individual.predicted_price}}</big></h3>
+        {% endif %}
+      </p>
+    </div>
+</div>    
+<p><h4><b><a href="{% url 'previous_prediction' individual.id %}" >View Previous predictions</a></b></h4></p>
+      <!-- <p><h4><b> Previous predictions:</b></h4> </p>
+<table class = 'table'>
+  <tr><td><b>Date</b></td> <td><b>Actual Colse Price</b></td> <td><b>Predicted Close Price</b></td><td><b>Difference</b></td></tr>
+  {% for i in q2 %}
+   
+   <tr><td><h3>{{i.date_added}}</h3> </td>  
+    {% if i.increased_bool %}
+    <td> <h3><small>{{i.target_price}}</small></h3></td><td><h3><small>{{i.predicted_price}}</small></h3></td><td><h3><small>{{i.difference}}</small></h3></td></tr>
+    {% else %}
+    <td> <h3><big>{{i.target_price}}</big></h3></td><td><h3><big>{{i.predicted_price}}</big></h3></td><td><h3><big>{{i.difference}}</big></h3></td></tr>
+    {% endif %}
+{% endfor %}  -->
+  
+
+
+
+ 
+
+
+
+<script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="{% static 'js/dataloader.min.js' %}"></script>
+    <style>
+    body, html {
+      font-family: Verdana;
+      font-size: 12px;
+    }
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+    <!-- {% if individual.id == 1%}
+    	urls = "{% static 'js/jsons/nabil.json' %}"
+    {% endif %} -->
+
+    <script>
+    var id = {{individual.id}};
+    if(id == 28){var urls1 = "{% static 'js/jsons/nabil.json' %}";}
+    else if(id == 29 ){var urls1 = "{% static 'js/jsons/sanima.json' %}";}
+    
+    else if(id == 30){var urls1 = "{% static 'js/jsons/adbl.json' %}";}
+    else if(id == 31){var urls1 = "{% static 'js/jsons/sbi.json' %}";}
+    else if(id == 32){var urls1 = "{% static 'js/jsons/plic.json' %}";}
+    
+    else if(id == 33){var urls1 = "{% static 'js/jsons/alicl.json' %}";}
+    
+    else if(id == 34){var urls1 = "{% static 'js/jsons/ahpc.json' %}";}
+    else if(id == 35){var urls1 = "{% static 'js/jsons/ntc.json' %}";}
+    var chart = AmCharts.makeChart("chartdiv", {
+     "type": "serial",
+      "dataLoader": {
+      	
+      	"url":urls1,
+      	//"url":"{% static 'js/jsons/nabil.json' %}",
+      	
+        // "url":"{% static 'js/jsons/nabil.json' %}",
+        "format": "json",
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart.dataProvider[ 0 ] ) {
+            if ( chart.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart.categoryField ) {
+              var graph = new AmCharts.AmGraph();
+              graph.valueField = key;
+              graph.type = "line";
+              graph.title = key,
+              graph.lineThickness = 2;
+              chart.addGraph( graph );
+            }
+          }
+        }
+    
+      },
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Year",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+       "title": "Prices"
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+    </script>
+    <div id="chartdiv" style="width:100%; height:400px;"></div>
+    <h8><center>Fig : Charts showing high,low and closed prices of {{individual.name}} </center> </h8>
+
+
+
+
+
+{% endif%}
+
+
+</div>
+
+
+{% endblock %}

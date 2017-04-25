@@ -1,0 +1,208 @@
+{% extends 'index.html' %}
+{% block content %} 
+{% load staticfiles %}
+{% include 'sidebar.html' %}
+<div class="mainbar">
+	<style>	
+th, td {
+    padding: 15px;
+}
+img{
+  border: none;
+}
+h3 {
+	font: 18px Arial, Helvetica, sans-serif;	
+	margin: 0px;
+}
+h3 small{
+	font: 18px Arial, Helvetica, sans-serif;
+	margin: 0px;
+	color:#08722A;
+
+}
+h3 big{
+	font: 18px Arial, Helvetica, sans-serif;
+	margin: 0px;
+	color:#721608;
+
+}
+</style>
+<h1>Nepse Index Analysis </h1>
+<div class="row">
+    <div class="col-sm-6">
+      <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{q1.previous_index}}</h3></p>
+    </div>
+    <div class="col-sm-6">
+      <p><h5>Predicted Nepse Index as of {{q1.date}}: </h5>
+		{% if query.increased_bool %}
+		<h3><small> {{q1.predicted_index}}</small></h3>
+		{% else %}
+		<h3> <big>{{q1.predicted_index}}</big></h3>
+		{% endif %}
+      </p>
+    </div>
+</div>
+
+<!-- <p><h4><b><a href="{% url 'previous_prediction' 1 %}" >View Previous predictions</a></b></h4></p> -->
+<p><h4><b><a href="{% url 'previous_nepse_prediction' %}" >View Previous predictions</a></b></h4></p>
+
+
+
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" type="text/css">
+        <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+        <script type="text/javascript" src="{% static 'js/amcharts.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/serial.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/amstock.js' %}"></script>
+<script>
+
+			var chartData1 = [];
+		
+			generateChartData();
+
+			function generateChartData() {
+				var firstDate = new Date();
+				firstDate.setDate(firstDate.getDate() - 1);
+				firstDate.setHours(0, 0, 0, 0);
+					k=0	
+					count=0
+				{% for i in neps_data %}
+						
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+						var a1 = {{i}} 
+						var b1 = Math.round(Math.random() * (100000 + k)) + 500 + k * 2;
+						
+						chartData1.push({
+							date: newDate,
+							value: a1,
+							volume: b1
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData1.reverse()
+				
+			}
+			AmCharts.makeChart("chartdiv", {
+				type: "stock",
+				dataSets: [{
+					title: "Nepse",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData1,
+					categoryField: "date"
+				},
+],
+
+				panels: [{
+
+					showCategoryAxis: false,
+					title: "Value",
+					percentHeight: 70,
+
+					stockGraphs: [{
+						id: "g1",
+
+						valueField: "value",
+						comparable: true,
+						compareField: "value",
+						bullet: "round",
+						bulletBorderColor: "#FFFFFF",
+						bulletBorderAlpha: 1,
+						balloonText: "[[title]]:<b>[[value]]</b>",
+						compareGraphBalloonText: "[[title]]:<b>[[value]]</b>",
+						compareGraphBullet: "round",
+						compareGraphBulletBorderColor: "#FFFFFF",
+						compareGraphBulletBorderAlpha: 1
+					}],
+
+					stockLegend: {
+						periodValueTextComparing: "[[percents.value.close]]%",
+						periodValueTextRegular: "[[value.close]]"
+					}
+				},
+
+				{
+					title: "Volume",
+					percentHeight: 30,
+					stockGraphs: [{
+						valueField: "volume",
+						type: "column",
+						showBalloon: false,
+						fillAlphas: 1
+					}],
+
+
+					stockLegend: {
+						periodValueTextRegular: "[[value.close]]"
+					}
+				}],
+
+				chartScrollbarSettings: {
+					graph: "g1",
+					updateOnReleaseOnly:false
+				},
+
+				chartCursorSettings: {
+					valueBalloonsEnabled: true,
+					valueLineEnabled:true,
+					valueLineBalloonEnabled:true
+				},
+
+				periodSelector: {
+					position: "left",
+					periods: [{
+						period: "DD",
+						count: 10,
+						label: "10 days"
+					}, {
+						period: "MM",
+						selected: true,
+						count: 1,
+						label: "1 month"
+					}, {
+						period: "YYYY",
+						count: 1,
+						label: "1 year"
+					}, {
+						period: "YTD",
+						label: "YTD"
+					}, {
+						period: "MAX",
+						label: "MAX"
+					}]
+				},
+
+				dataSetSelector: {
+					position: "left"
+				}
+			});
+		</script>
+<!-- {{list}} -->
+<h8><center>Fig : Charts showing Nepse Indices </center> </h8>
+<div id="chartdiv" style="width:100%; height:400px;"></div>
+
+
+
+
+</div>
+<div class="clr"></div>
+
+
+
+
+{% endblock %}

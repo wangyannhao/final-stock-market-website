@@ -1,0 +1,448 @@
+{% extends 'index.html' %}
+{% block navigation %} 
+		  <li><a href="{% url 'home1' %}">Home</a></li>
+          <li class="active"><a href="{% url 'khatra' %}">Analysis</a></li>
+          <li><a href="{% url 'prediction' %}">Prediction</a></li>
+          <li ><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+{% block content %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" type="text/css">
+		<script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="{% static 'js/amcharts.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/serial.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/amstock.js' %}"></script>
+		
+		<script>
+
+			var chartData1 = [];
+			var chartData2 = [];
+			var chartData3 = [];
+			var chartData4 = [];
+			var chartData5 = [];
+			var chartData6 = [];
+			var chartData7 = [];
+			var chartData8 = [];
+
+			generateChartData();
+
+			function generateChartData() {
+				var firstDate = new Date();
+				firstDate.setDate(firstDate.getDate() - 1);
+				firstDate.setHours(0, 0, 0, 0);
+					k=0	
+					count=0
+				{% for i in bank_data %}
+						
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+						var a1 = {{i}} 
+						var b1 = Math.round(Math.random() * (1000 + k)) + 500 + k * 2;
+						
+						chartData1.push({
+							date: newDate,
+							value: a1,
+							volume: b1
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData1.reverse()
+				k=0
+				count=0
+				{% for i in devbank_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+						
+						var a2 = {{i}}
+						var b2 = Math.round(Math.random() * (1000 + k)) + 600 + k * 2;
+
+						chartData2.push({
+							date: newDate,
+							value: a2,
+							volume: b2
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData2.reverse()
+				k=0
+				count=0
+				{% for i in finance_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a3 = {{i}}
+						var b3 = Math.round(Math.random() * (1000 + k)) + 600 + k * 2;
+
+						chartData3.push({
+							date: newDate,
+							value: a3,
+							volume: b3
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData3.reverse()
+				k=0
+				count=0
+				{% for i in hotel_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a4 = {{i}}
+						var b4 = Math.round(Math.random() * (100 + k)) + 600 + k;	
+
+						chartData4.push({
+							date: newDate,
+							value: a4,
+							volume: b4
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData4.reverse()
+				k=0
+				count=0
+				{% for i in hydropower_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a5 = {{i}}
+						var b5 = Math.round(Math.random() * (100 + k)) + 600 + k;	
+
+						chartData5.push({
+							date: newDate,
+							value: a5,
+							volume: b5
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+			chartData5.reverse()		
+			k=0
+				count=0
+				{% for i in insurance_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a6 = {{i}}
+						var b6 = Math.round(Math.random() * (100 + k)) + 600 + k;	
+
+						chartData6.push({
+							date: newDate,
+							value: a6,
+							volume: b6
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+			chartData6.reverse()
+			k=0
+				count=0
+				{% for i in nepse_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a7 = {{i}}
+						var b7 = Math.round(Math.random() * (100 + k)) + 600 + k;	
+
+						chartData7.push({
+							date: newDate,
+							value: a7,
+							volume: b7
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+			chartData7.reverse()
+			k=0
+				count=0
+				{% for i in others_data %}
+
+					
+						var newDate = new Date(firstDate);
+						newDate.setDate(newDate.getDate() - k);
+
+						var a8 = {{i}}
+						var b8 = Math.round(Math.random() * (100 + k)) + 600 + k;	
+
+						chartData8.push({
+							date: newDate,
+							value: a8,
+							volume: b8
+						});
+						count++;
+						if(count<5)
+						{
+							k=k+1;
+						}
+						else
+						{
+							k=k+3;
+							count=0
+						}
+				{% endfor %}
+				chartData8.reverse()		
+			}
+			AmCharts.makeChart("chartdiv", {
+				type: "stock",
+				dataSets: [{
+					title: "Bank",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData1,
+					categoryField: "date"
+				},
+
+				{
+					title: "Devlopment Bank",
+					compared:true,
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData2,
+					categoryField: "date"
+				},
+
+				{
+					title: "Finance",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData3,
+					categoryField: "date"
+				},
+				
+				{
+					title: "Hydropower",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData5,
+					categoryField: "date"
+				},
+				{
+					title: "Nepse",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData7,
+					categoryField: "date"
+				},
+				{
+					title: "Others",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData8,
+					categoryField: "date"
+				},
+				{
+					title: "Insurance",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData6,
+					categoryField: "date"
+				},
+				{
+					title: "Hotel",
+					fieldMappings: [{
+						fromField: "value",
+						toField: "value"
+					}, {
+						fromField: "volume",
+						toField: "volume"
+					}],
+					dataProvider: chartData4,
+					categoryField: "date"
+				}],
+
+				panels: [{
+
+					showCategoryAxis: false,
+					title: "Value",
+					percentHeight: 70,
+
+					stockGraphs: [{
+						id: "g1",
+
+						valueField: "value",
+						comparable: true,
+						compareField: "value",
+						bullet: "round",
+						bulletBorderColor: "#FFFFFF",
+						bulletBorderAlpha: 1,
+						balloonText: "[[title]]:<b>[[value]]</b>",
+						compareGraphBalloonText: "[[title]]:<b>[[value]]</b>",
+						compareGraphBullet: "round",
+						compareGraphBulletBorderColor: "#FFFFFF",
+						compareGraphBulletBorderAlpha: 1
+					}],
+
+					stockLegend: {
+						periodValueTextComparing: "[[percents.value.close]]%",
+						periodValueTextRegular: "[[value.close]]"
+					}
+				},
+
+				{
+					title: "Volume",
+					percentHeight: 30,
+					stockGraphs: [{
+						valueField: "volume",
+						type: "column",
+						showBalloon: false,
+						fillAlphas: 1
+					}],
+
+
+					stockLegend: {
+						periodValueTextRegular: "[[value.close]]"
+					}
+				}],
+
+				chartScrollbarSettings: {
+					graph: "g1",
+					updateOnReleaseOnly:false
+				},
+
+				chartCursorSettings: {
+					valueBalloonsEnabled: true,
+					valueLineEnabled:true,
+					valueLineBalloonEnabled:true
+				},
+
+				periodSelector: {
+					position: "left",
+					periods: [{
+						period: "DD",
+						count: 10,
+						label: "10 days"
+					}, {
+						period: "MM",
+						selected: true,
+						count: 1,
+						label: "1 month"
+					}, {
+						period: "YYYY",
+						count: 1,
+						label: "1 year"
+					}, {
+						period: "YTD",
+						label: "YTD"
+					}, {
+						period: "MAX",
+						label: "MAX"
+					}]
+				},
+
+				dataSetSelector: {
+					position: "left"
+				}
+			});
+		</script>
+{{list}}
+<div id="chartdiv" style="width:100%; height:600px;"></div>
+
+{% endblock %}

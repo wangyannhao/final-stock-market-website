@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block navigation %} 
+		  <li><a href="{% url 'home1' %}">Home</a></li>
+          <li><a href="{% url 'khatra' %}">Analysis</a></li>
+          <li class="active"><a href="{% url 'prediction' %}">Prediction</a></li>
+          <li ><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+
+
+{% block content %} 
+{% include 'sidebar.html' %}
+<style>
+th, td {
+    padding: 15px;
+}
+h3{
+  font: 14px Arial, Helvetica, sans-serif;
+  margin: 0px;
+}
+ h3 small{
+  font: 14px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#08722A;
+
+}
+h3 big{
+  font: 14px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#721608;
+}
+  </style>
+<div class="mainbar">
+<p><h1> Previous Nepse Index Predictions </h1> </p>
+<table class = 'table'>
+	<tr><td><b>Date</b></td> <td><b>Actual Nepse Index</b></td> <td><b>Predicted Nepse Index</b></td><td><b>Difference</b></td><td><b>Previous Nepse Index</b></td></tr>
+	{% for i in query %}
+	 
+	 <tr><td><h3>{{i.date}}</h3> </td>  
+	 	{% if i.increased_bool %}
+	 	<td> <h3><small>{{i.index}}</small></h3></td><td><h3><small>{{i.predicted_index}}</small></h3></td><td><h3><small>{{i.difference}}</small></h3></td><td><h3><small>{{i.previous_index}}</small></h3></td></tr>
+	 	{% else %}
+	 	<td> <h3><big>{{i.index}}</big></h3></td><td><h3><big>{{i.predicted_index}}</big></h3></td><td><h3><big>{{i.difference}}</big></h3></td><td><h3><big>{{i.previous_index}}</big></h3></td></tr>
+	 	{% endif %}
+{% endfor %}	 
+</table>
+</div>
+{% endblock %}

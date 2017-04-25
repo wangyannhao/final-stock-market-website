@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% block sidebar %}
+<div class="sidebar" >
+<style type="text/css">
+	h6 a{
+	color:#d76002;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-top: 0px;
+	margin: 0px;
+	}
+	.star{
+		margin-bottom: 30px;
+		margin-top: 20px;
+	}
+	ul li{
+		padding: 0px;
+		margin: 0px;
+		color:#d76002;
+	}
+
+</style>
+	<h2 class="star" style="padding:10px 20px 10px 20px;">Companies</h2>
+        <div class="gadget">
+          	<li><h6><a href="{% url 'prediction' 28 %}" >Nabil Bank Limited</a></h6></li><br>
+			<li><h6><a href="{% url 'prediction' 29 %}" >Sanima Bank Limited</a></h6></li><br>
+			<!-- <li><h6><a href="{% url 'prediction' 3 %}" >Standard Chartered Bank</a></h6></li><br> -->
+			<li><h6><a href="{% url 'prediction' 30 %}" >Agriculture Development Bank</a></h6></li><br>
+			<li><h6><a href="{% url 'prediction' 31 %}" >Nepal SBI Bank</a></h6></li><br>
+			<li><h6><a href="{% url 'prediction' 32 %}" >Prime Life Insurance Company</a></h6></li><br>
+			<!-- <li><h6><a href="{% url 'prediction' 7 %}" >Sanima Hydropower Company</a></h6></li><br> -->
+			<li><h6><a href="{% url 'prediction' 33 %}" >Asian Life Insurance Company</a></h6></li><br>
+			<!-- <li><h6><a href="{% url 'prediction' 9 %}" >Redi Hydropower Company</a></h6></li><br> -->
+			<li><h6><a href="{% url 'prediction' 34 %}" >Arun Hydropower Company</a></h6></li><br>
+			<li><h6><a href="{% url 'prediction' 35 %}" >Nepal Telecom Limited</a></h6></li><br>
+		
+        </div>
+  </div>
+{% endblock %}

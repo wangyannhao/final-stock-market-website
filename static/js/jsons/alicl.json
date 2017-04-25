@@ -1,0 +1,902 @@
+[
+ {
+   "Date": "2016-01-03",
+   "Min. Price": 1224,
+   "Close Price": 1304,
+   "Max. Price": 1304
+ },
+ {
+   "Date": "2016-01-04",
+   "Min. Price": 1240,
+   "Close Price": 1275,
+   "Max. Price": 1300
+ },
+ {
+   "Date": "2016-01-05",
+   "Min. Price": 1245,
+   "Close Price": 1263,
+   "Max. Price": 1285
+ },
+ {
+   "Date": "2016-01-06",
+   "Min. Price": 1225,
+   "Close Price": 1235,
+   "Max. Price": 1248
+ },
+ {
+   "Date": "2016-01-07",
+   "Min. Price": 1240,
+   "Close Price": 1270,
+   "Max. Price": 1282
+ },
+ {
+   "Date": "2016-01-10",
+   "Min. Price": 1230,
+   "Close Price": 1230,
+   "Max. Price": 1270
+ },
+ {
+   "Date": "2016-01-11",
+   "Min. Price": 1240,
+   "Close Price": 1248,
+   "Max. Price": 1264
+ },
+ {
+   "Date": "2016-01-12",
+   "Min. Price": 1250,
+   "Close Price": 1252,
+   "Max. Price": 1265
+ },
+ {
+   "Date": "2016-01-13",
+   "Min. Price": 1245,
+   "Close Price": 1250,
+   "Max. Price": 1261
+ },
+ {
+   "Date": "2016-01-14",
+   "Min. Price": 1250,
+   "Close Price": 1274,
+   "Max. Price": 1280
+ },
+ {
+   "Date": "2016-01-17",
+   "Min. Price": 1280,
+   "Close Price": 1300,
+   "Max. Price": 1300
+ },
+ {
+   "Date": "2016-01-18",
+   "Min. Price": 1270,
+   "Close Price": 1289,
+   "Max. Price": 1317
+ },
+ {
+   "Date": "2016-01-19",
+   "Min. Price": 1270,
+   "Close Price": 1280,
+   "Max. Price": 1290
+ },
+ {
+   "Date": "2016-01-20",
+   "Min. Price": 1265,
+   "Close Price": 1275,
+   "Max. Price": 1280
+ },
+ {
+   "Date": "2016-01-21",
+   "Min. Price": 1255,
+   "Close Price": 1295,
+   "Max. Price": 1300
+ },
+ {
+   "Date": "2016-01-24",
+   "Min. Price": 1285,
+   "Close Price": 1299,
+   "Max. Price": 1300
+ },
+ {
+   "Date": "2016-01-25",
+   "Min. Price": 1289,
+   "Close Price": 1300,
+   "Max. Price": 1326
+ },
+ {
+   "Date": "2016-01-26",
+   "Min. Price": 1280,
+   "Close Price": 1280,
+   "Max. Price": 1299
+ },
+ {
+   "Date": "2016-01-27",
+   "Min. Price": 1266,
+   "Close Price": 1266,
+   "Max. Price": 1285
+ },
+ {
+   "Date": "2016-01-28",
+   "Min. Price": 1270,
+   "Close Price": 1272,
+   "Max. Price": 1275
+ },
+ {
+   "Date": "2016-01-31",
+   "Min. Price": 1260,
+   "Close Price": 1265,
+   "Max. Price": 1270
+ },
+ {
+   "Date": "2016-02-01",
+   "Min. Price": 1270,
+   "Close Price": 1280,
+   "Max. Price": 1283
+ },
+ {
+   "Date": "2016-02-02",
+   "Min. Price": 1261,
+   "Close Price": 1265,
+   "Max. Price": 1290
+ },
+ {
+   "Date": "2016-02-03",
+   "Min. Price": 1266,
+   "Close Price": 1275,
+   "Max. Price": 1280
+ },
+ {
+   "Date": "2016-02-04",
+   "Min. Price": 1275,
+   "Close Price": 1300,
+   "Max. Price": 1305
+ },
+ {
+   "Date": "2016-02-07",
+   "Min. Price": 1310,
+   "Close Price": 1371,
+   "Max. Price": 1385
+ },
+ {
+   "Date": "2016-02-08",
+   "Min. Price": 1350,
+   "Close Price": 1360,
+   "Max. Price": 1405
+ },
+ {
+   "Date": "2016-02-11",
+   "Min. Price": 1320,
+   "Close Price": 1330,
+   "Max. Price": 1355
+ },
+ {
+   "Date": "2016-02-14",
+   "Min. Price": 1300,
+   "Close Price": 1302,
+   "Max. Price": 1330
+ },
+ {
+   "Date": "2016-02-15",
+   "Min. Price": 1289,
+   "Close Price": 1328,
+   "Max. Price": 1328
+ },
+ {
+   "Date": "2016-02-16",
+   "Min. Price": 1302,
+   "Close Price": 1338,
+   "Max. Price": 1338
+ },
+ {
+   "Date": "2016-02-17",
+   "Min. Price": 1320,
+   "Close Price": 1340,
+   "Max. Price": 1361
+ },
+ {
+   "Date": "2016-02-18",
+   "Min. Price": 1320,
+   "Close Price": 1345,
+   "Max. Price": 1399
+ },
+ {
+   "Date": "2016-02-21",
+   "Min. Price": 1330,
+   "Close Price": 1331,
+   "Max. Price": 1371
+ },
+ {
+   "Date": "2016-02-22",
+   "Min. Price": 1325,
+   "Close Price": 1332,
+   "Max. Price": 1345
+ },
+ {
+   "Date": "2016-02-23",
+   "Min. Price": 1325,
+   "Close Price": 1335,
+   "Max. Price": 1335
+ },
+ {
+   "Date": "2016-02-25",
+   "Min. Price": 1309,
+   "Close Price": 1310,
+   "Max. Price": 1310
+ },
+ {
+   "Date": "2016-02-28",
+   "Min. Price": 1310,
+   "Close Price": 1345,
+   "Max. Price": 1345
+ },
+ {
+   "Date": "2016-02-29",
+   "Min. Price": 1310,
+   "Close Price": 1339,
+   "Max. Price": 1339
+ },
+ {
+   "Date": "2016-03-01",
+   "Min. Price": 1315,
+   "Close Price": 1327,
+   "Max. Price": 1360
+ },
+ {
+   "Date": "2016-03-02",
+   "Min. Price": 1321,
+   "Close Price": 1334,
+   "Max. Price": 1345
+ },
+ {
+   "Date": "2016-03-03",
+   "Min. Price": 1331,
+   "Close Price": 1340,
+   "Max. Price": 1347
+ },
+ {
+   "Date": "2016-03-06",
+   "Min. Price": 1325,
+   "Close Price": 1360,
+   "Max. Price": 1375
+ },
+ {
+   "Date": "2016-03-10",
+   "Min. Price": 1363,
+   "Close Price": 1380,
+   "Max. Price": 1389
+ },
+ {
+   "Date": "2016-03-13",
+   "Min. Price": 1363,
+   "Close Price": 1390,
+   "Max. Price": 1400
+ },
+ {
+   "Date": "2016-03-14",
+   "Min. Price": 1377,
+   "Close Price": 1377,
+   "Max. Price": 1392
+ },
+ {
+   "Date": "2016-03-15",
+   "Min. Price": 1378,
+   "Close Price": 1380,
+   "Max. Price": 1395
+ },
+ {
+   "Date": "2016-03-16",
+   "Min. Price": 1366,
+   "Close Price": 1380,
+   "Max. Price": 1387
+ },
+ {
+   "Date": "2016-03-17",
+   "Min. Price": 1370,
+   "Close Price": 1395,
+   "Max. Price": 1404
+ },
+ {
+   "Date": "2016-03-20",
+   "Min. Price": 1417,
+   "Close Price": 1450,
+   "Max. Price": 1465
+ },
+ {
+   "Date": "2016-03-21",
+   "Min. Price": 1446,
+   "Close Price": 1446,
+   "Max. Price": 1480
+ },
+ {
+   "Date": "2016-03-23",
+   "Min. Price": 1449,
+   "Close Price": 1465,
+   "Max. Price": 1465
+ },
+ {
+   "Date": "2016-03-24",
+   "Min. Price": 1445,
+   "Close Price": 1445,
+   "Max. Price": 1455
+ },
+ {
+   "Date": "2016-03-27",
+   "Min. Price": 1422,
+   "Close Price": 1445,
+   "Max. Price": 1450
+ },
+ {
+   "Date": "2016-03-28",
+   "Min. Price": 1412,
+   "Close Price": 1425,
+   "Max. Price": 1430
+ },
+ {
+   "Date": "2016-03-29",
+   "Min. Price": 1410,
+   "Close Price": 1415,
+   "Max. Price": 1439
+ },
+ {
+   "Date": "2016-03-30",
+   "Min. Price": 1361,
+   "Close Price": 1380,
+   "Max. Price": 1440
+ },
+ {
+   "Date": "2016-03-31",
+   "Min. Price": 1345,
+   "Close Price": 1370,
+   "Max. Price": 1390
+ },
+ {
+   "Date": "2016-04-03",
+   "Min. Price": 1340,
+   "Close Price": 1380,
+   "Max. Price": 1380
+ },
+ {
+   "Date": "2016-04-04",
+   "Min. Price": 1360,
+   "Close Price": 1365,
+   "Max. Price": 1375
+ },
+ {
+   "Date": "2016-04-05",
+   "Min. Price": 1350,
+   "Close Price": 1355,
+   "Max. Price": 1365
+ },
+ {
+   "Date": "2016-04-06",
+   "Min. Price": 1370,
+   "Close Price": 1375,
+   "Max. Price": 1381
+ },
+ {
+   "Date": "2016-04-10",
+   "Min. Price": 1355,
+   "Close Price": 1360,
+   "Max. Price": 1364
+ },
+ {
+   "Date": "2016-04-11",
+   "Min. Price": 1352,
+   "Close Price": 1352,
+   "Max. Price": 1362
+ },
+ {
+   "Date": "2016-04-12",
+   "Min. Price": 1330,
+   "Close Price": 1340,
+   "Max. Price": 1355
+ },
+ {
+   "Date": "2016-04-14",
+   "Min. Price": 1273,
+   "Close Price": 1398,
+   "Max. Price": 1398
+ },
+ {
+   "Date": "2016-04-17",
+   "Min. Price": 1371,
+   "Close Price": 1390,
+   "Max. Price": 1400
+ },
+ {
+   "Date": "2016-04-18",
+   "Min. Price": 1380,
+   "Close Price": 1399,
+   "Max. Price": 1399
+ },
+ {
+   "Date": "2016-04-19",
+   "Min. Price": 1375,
+   "Close Price": 1399,
+   "Max. Price": 1410
+ },
+ {
+   "Date": "2016-04-20",
+   "Min. Price": 1399,
+   "Close Price": 1402,
+   "Max. Price": 1410
+ },
+ {
+   "Date": "2016-04-21",
+   "Min. Price": 1375,
+   "Close Price": 1404,
+   "Max. Price": 1404
+ },
+ {
+   "Date": "2016-04-24",
+   "Min. Price": 1381,
+   "Close Price": 1404,
+   "Max. Price": 1406
+ },
+ {
+   "Date": "2016-04-25",
+   "Min. Price": 1391,
+   "Close Price": 1410,
+   "Max. Price": 1410
+ },
+ {
+   "Date": "2016-04-26",
+   "Min. Price": 1387,
+   "Close Price": 1395,
+   "Max. Price": 1400
+ },
+ {
+   "Date": "2016-04-27",
+   "Min. Price": 1390,
+   "Close Price": 1419,
+   "Max. Price": 1419
+ },
+ {
+   "Date": "2016-04-28",
+   "Min. Price": 1393,
+   "Close Price": 1393,
+   "Max. Price": 1430
+ },
+ {
+   "Date": "2016-05-02",
+   "Min. Price": 1400,
+   "Close Price": 1400,
+   "Max. Price": 1420
+ },
+ {
+   "Date": "2016-05-03",
+   "Min. Price": 1395,
+   "Close Price": 1405,
+   "Max. Price": 1405
+ },
+ {
+   "Date": "2016-05-04",
+   "Min. Price": 1381,
+   "Close Price": 1410,
+   "Max. Price": 1430
+ },
+ {
+   "Date": "2016-05-05",
+   "Min. Price": 1382,
+   "Close Price": 1400,
+   "Max. Price": 1410
+ },
+ {
+   "Date": "2016-05-08",
+   "Min. Price": 1375,
+   "Close Price": 1395,
+   "Max. Price": 1400
+ },
+ {
+   "Date": "2016-05-09",
+   "Min. Price": 1385,
+   "Close Price": 1395,
+   "Max. Price": 1402
+ },
+ {
+   "Date": "2016-05-10",
+   "Min. Price": 1390,
+   "Close Price": 1400,
+   "Max. Price": 1422
+ },
+ {
+   "Date": "2016-05-11",
+   "Min. Price": 1395,
+   "Close Price": 1419,
+   "Max. Price": 1419
+ },
+ {
+   "Date": "2016-05-12",
+   "Min. Price": 1404,
+   "Close Price": 1440,
+   "Max. Price": 1440
+ },
+ {
+   "Date": "2016-05-15",
+   "Min. Price": 1415,
+   "Close Price": 1415,
+   "Max. Price": 1445
+ },
+ {
+   "Date": "2016-05-16",
+   "Min. Price": 1400,
+   "Close Price": 1430,
+   "Max. Price": 1430
+ },
+ {
+   "Date": "2016-05-17",
+   "Min. Price": 1415,
+   "Close Price": 1420,
+   "Max. Price": 1425
+ },
+ {
+   "Date": "2016-05-18",
+   "Min. Price": 1440,
+   "Close Price": 1476,
+   "Max. Price": 1476
+ },
+ {
+   "Date": "2016-05-19",
+   "Min. Price": 1470,
+   "Close Price": 1480,
+   "Max. Price": 1489
+ },
+ {
+   "Date": "2016-05-22",
+   "Min. Price": 1451,
+   "Close Price": 1490,
+   "Max. Price": 1500
+ },
+ {
+   "Date": "2016-05-23",
+   "Min. Price": 1477,
+   "Close Price": 1491,
+   "Max. Price": 1500
+ },
+ {
+   "Date": "2016-05-24",
+   "Min. Price": 1470,
+   "Close Price": 1480,
+   "Max. Price": 1500
+ },
+ {
+   "Date": "2016-05-25",
+   "Min. Price": 1460,
+   "Close Price": 1460,
+   "Max. Price": 1500
+ },
+ {
+   "Date": "2016-05-26",
+   "Min. Price": 1412,
+   "Close Price": 1470,
+   "Max. Price": 1475
+ },
+ {
+   "Date": "2016-05-29",
+   "Min. Price": 1460,
+   "Close Price": 1460,
+   "Max. Price": 1477
+ },
+ {
+   "Date": "2016-05-30",
+   "Min. Price": 1453,
+   "Close Price": 1478,
+   "Max. Price": 1484
+ },
+ {
+   "Date": "2016-05-31",
+   "Min. Price": 1470,
+   "Close Price": 1470,
+   "Max. Price": 1490
+ },
+ {
+   "Date": "2016-06-01",
+   "Min. Price": 1460,
+   "Close Price": 1465,
+   "Max. Price": 1475
+ },
+ {
+   "Date": "2016-06-02",
+   "Min. Price": 1440,
+   "Close Price": 1444,
+   "Max. Price": 1465
+ },
+ {
+   "Date": "2016-06-05",
+   "Min. Price": 1400,
+   "Close Price": 1400,
+   "Max. Price": 1435
+ },
+ {
+   "Date": "2016-06-06",
+   "Min. Price": 1407,
+   "Close Price": 1410,
+   "Max. Price": 1428
+ },
+ {
+   "Date": "2016-06-07",
+   "Min. Price": 1412,
+   "Close Price": 1434,
+   "Max. Price": 1448
+ },
+ {
+   "Date": "2016-06-08",
+   "Min. Price": 1440,
+   "Close Price": 1485,
+   "Max. Price": 1485
+ },
+ {
+   "Date": "2016-06-09",
+   "Min. Price": 1470,
+   "Close Price": 1575,
+   "Max. Price": 1610
+ },
+ {
+   "Date": "2016-06-12",
+   "Min. Price": 1515,
+   "Close Price": 1551,
+   "Max. Price": 1600
+ },
+ {
+   "Date": "2016-06-13",
+   "Min. Price": 1525,
+   "Close Price": 1585,
+   "Max. Price": 1585
+ },
+ {
+   "Date": "2016-06-14",
+   "Min. Price": 1590,
+   "Close Price": 1635,
+   "Max. Price": 1645
+ },
+ {
+   "Date": "2016-06-15",
+   "Min. Price": 1667,
+   "Close Price": 1745,
+   "Max. Price": 1755
+ },
+ {
+   "Date": "2016-06-16",
+   "Min. Price": 1779,
+   "Close Price": 1870,
+   "Max. Price": 1919
+ },
+ {
+   "Date": "2016-06-19",
+   "Min. Price": 1740,
+   "Close Price": 1790,
+   "Max. Price": 1900
+ },
+ {
+   "Date": "2016-06-20",
+   "Min. Price": 1700,
+   "Close Price": 1733,
+   "Max. Price": 1805
+ },
+ {
+   "Date": "2016-06-21",
+   "Min. Price": 1745,
+   "Close Price": 1770,
+   "Max. Price": 1775
+ },
+ {
+   "Date": "2016-06-22",
+   "Min. Price": 1770,
+   "Close Price": 1880,
+   "Max. Price": 1892
+ },
+ {
+   "Date": "2016-06-23",
+   "Min. Price": 1880,
+   "Close Price": 1880,
+   "Max. Price": 1989
+ },
+ {
+   "Date": "2016-06-26",
+   "Min. Price": 1845,
+   "Close Price": 1850,
+   "Max. Price": 1885
+ },
+ {
+   "Date": "2016-06-27",
+   "Min. Price": 1790,
+   "Close Price": 1790,
+   "Max. Price": 1860
+ },
+ {
+   "Date": "2016-06-28",
+   "Min. Price": 1760,
+   "Close Price": 1816,
+   "Max. Price": 1850
+ },
+ {
+   "Date": "2016-06-29",
+   "Min. Price": 1820,
+   "Close Price": 1820,
+   "Max. Price": 1880
+ },
+ {
+   "Date": "2016-06-30",
+   "Min. Price": 1821,
+   "Close Price": 1822,
+   "Max. Price": 1837
+ },
+ {
+   "Date": "2016-07-03",
+   "Min. Price": 1770,
+   "Close Price": 1770,
+   "Max. Price": 1820
+ },
+ {
+   "Date": "2016-07-04",
+   "Min. Price": 1751,
+   "Close Price": 1790,
+   "Max. Price": 1790
+ },
+ {
+   "Date": "2016-07-05",
+   "Min. Price": 1745,
+   "Close Price": 1790,
+   "Max. Price": 1790
+ },
+ {
+   "Date": "2016-07-06",
+   "Min. Price": 1750,
+   "Close Price": 1750,
+   "Max. Price": 1790
+ },
+ {
+   "Date": "2016-07-10",
+   "Min. Price": 1735,
+   "Close Price": 1758,
+   "Max. Price": 1780
+ },
+ {
+   "Date": "2016-07-11",
+   "Min. Price": 1715,
+   "Close Price": 1720,
+   "Max. Price": 1740
+ },
+ {
+   "Date": "2016-07-12",
+   "Min. Price": 1641,
+   "Close Price": 1695,
+   "Max. Price": 1730
+ },
+ {
+   "Date": "2016-07-13",
+   "Min. Price": 1653,
+   "Close Price": 1700,
+   "Max. Price": 1700
+ },
+ {
+   "Date": "2016-07-14",
+   "Min. Price": 1700,
+   "Close Price": 1710,
+   "Max. Price": 1750
+ },
+ {
+   "Date": "2016-07-17",
+   "Min. Price": 1657,
+   "Close Price": 1715,
+   "Max. Price": 1754
+ },
+ {
+   "Date": "2016-07-18",
+   "Min. Price": 1715,
+   "Close Price": 1886,
+   "Max. Price": 1886
+ },
+ {
+   "Date": "2016-07-19",
+   "Min. Price": 1785,
+   "Close Price": 1800,
+   "Max. Price": 1930
+ },
+ {
+   "Date": "2016-07-20",
+   "Min. Price": 1800,
+   "Close Price": 1815,
+   "Max. Price": 1830
+ },
+ {
+   "Date": "2016-07-21",
+   "Min. Price": 1790,
+   "Close Price": 1812,
+   "Max. Price": 1830
+ },
+ {
+   "Date": "2016-07-25",
+   "Min. Price": 1810,
+   "Close Price": 1836,
+   "Max. Price": 1855
+ },
+ {
+   "Date": "2016-07-26",
+   "Min. Price": 1840,
+   "Close Price": 1860,
+   "Max. Price": 1870
+ },
+ {
+   "Date": "2016-07-27",
+   "Min. Price": 1821,
+   "Close Price": 1840,
+   "Max. Price": 1890
+ },
+ {
+   "Date": "2016-07-28",
+   "Min. Price": 1815,
+   "Close Price": 1871,
+   "Max. Price": 1880
+ },
+ {
+   "Date": "2016-07-31",
+   "Min. Price": 1844,
+   "Close Price": 1850,
+   "Max. Price": 1881
+ },
+ {
+   "Date": "2016-08-01",
+   "Min. Price": 1830,
+   "Close Price": 1870,
+   "Max. Price": 1880
+ },
+ {
+   "Date": "2016-08-02",
+   "Min. Price": 1841,
+   "Close Price": 1860,
+   "Max. Price": 1880
+ },
+ {
+   "Date": "2016-08-03",
+   "Min. Price": 1803,
+   "Close Price": 1837,
+   "Max. Price": 1874
+ },
+ {
+   "Date": "2016-08-04",
+   "Min. Price": 1750,
+   "Close Price": 1770,
+   "Max. Price": 1835
+ },
+ {
+   "Date": "2016-08-07",
+   "Min. Price": 1753,
+   "Close Price": 1756,
+   "Max. Price": 1815
+ },
+ {
+   "Date": "2016-08-08",
+   "Min. Price": 1665,
+   "Close Price": 1665,
+   "Max. Price": 1726
+ },
+ {
+   "Date": "2016-08-09",
+   "Min. Price": 1698,
+   "Close Price": 1731,
+   "Max. Price": 1731
+ },
+ {
+   "Date": "2016-08-10",
+   "Min. Price": 1696,
+   "Close Price": 1760,
+   "Max. Price": 1836
+ },
+ {
+   "Date": "2016-08-11",
+   "Min. Price": 1750,
+   "Close Price": 1764,
+   "Max. Price": 1770
+ },
+ {
+   "Date": "2016-08-14",
+   "Min. Price": 1699,
+   "Close Price": 1700,
+   "Max. Price": 1735
+ },
+ {
+   "Date": "2016-08-15",
+   "Min. Price": 1601,
+   "Close Price": 1630,
+   "Max. Price": 1666
+ }
+]
