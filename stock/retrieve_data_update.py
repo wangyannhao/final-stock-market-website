@@ -13,6 +13,7 @@ import linear_regression as lr
 from ann import predict as predict_ann
 from linear_regression import predict as predict_regression
 from svm_manual import predict as predict_svm
+
 def store_realtime_in_database(mydb, table,data):
     # data = [Realtime, Price, Volume]
     cursor = mydb.cursor()
@@ -132,20 +133,30 @@ def collect_data():
     historical = 0     
     mydb = MySQLdb.connect(host = 'localhost',
            user='root',
-           passwd='93112525',
-           db='test')
+           passwd='123456',
+           db='sys')
    
-    stock = ['GOOG','YHOO','FB','AMZN','TWTR']
-    table_realtime = {'GOOG':'GOOG_realtime',
-                  'YHOO':'YHOO_realtime',
-                  'FB':'FB_realtime',
+    stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
+    table_realtime = {'AAPL':'AAPL_realtime',
                   'AMZN':'AMZN_realtime',
-                  'TWTR':'TWTR_realtime'}
-    table_historical = {'GOOG':'GOOG_historical',
-                  'YHOO':'YHOO_historical',
-                  'FB':'FB_historical',
+                  'FB':'FB_realtime',
+                  'GOOG':'GOOG_realtime',
+                  'GPRO':'GPRO_realtime',
+                  'INTC':'INTC_realtime',
+                  'NFLX':'NFLX_realtime',
+                  'TSLA':'TSLA_realtime',
+                  'TWTR':'TWTR_realtime',
+                  'YHOO':'YHOO_realtime'}
+    table_historical = {'AAPL':'AAPL_historical',
                   'AMZN':'AMZN_historical',
-                  'TWTR':'TWTR_historical'}
+                  'FB':'FB_historical',
+                  'GOOG':'GOOG_historical',
+                  'GPRO':'GPRO_historical',
+                  'INTC':'INTC_historical',
+                  'NFLX':'NFLX_historical',
+                  'TSLA':'TSLA_historical',
+                  'TWTR':'TWTR_historical',
+                  'YHOO':'YHOO_historical'}
     
     for i in range(len(stock)):
         if historical:
@@ -173,8 +184,8 @@ def collect_data():
 def get_data_db(table):
     mydb = MySQLdb.connect(host = 'localhost',
        user='root',
-       passwd='93112525',
-       db='test')
+       passwd='123456',
+       db='sys')
     cursor = mydb.cursor()
     cursor.execute("SELECT * from "+table)
     tbl = cursor.fetchall()
@@ -226,6 +237,7 @@ def bollingerBands(tbl, dur = 20):
     whole = get_data_db(tbl)
     close = zip(*whole)[2]
     close = np.asarray(map(float,close[0:len(close)-1]))
+    Date = zip(*whole[0:len(whole)-1])[0]
     data = {'price': close}
     df = pd.DataFrame(data)
     df['MA'] = df.rolling(window=20).mean()
@@ -234,13 +246,25 @@ def bollingerBands(tbl, dur = 20):
     df['lower'] = df['MA'] - std
     df['b'] = (df['price']-df['lower']) / (df['upper']-df['lower'])*1.00
     df['BW'] = (df['upper']-df['lower']) / df['MA']*1.00
-    plt.plot(df['price'])
-    plt.plot(df['MA'])
-    plt.plot(df['upper'])
-    plt.plot(df['lower'])
+    df['date'] = Date
+
+    #csv
+    temp = pd.DataFrame({'Date':df['date'],'Price':df['price'],'MA':df['MA'],'upper':df['upper'],
+        'lower':df['lower']})
+    stockabbr = tbl.split('_')[0]
+    csvfileName1 = stockabbr+'_bollinger1.csv'
+    temp.to_csv(csvfileName1,index_label=False,index=False)
+
+    temp1 = pd.DataFrame({'Date':df['date'],'b':df['b'],'BW':df['BW']})
+    csvfileName2 = stockabbr+'_bollinger2.csv'
+    temp1.to_csv("../static/js/indicator/"+csvfileName2,index_label=False,index=False)
+    # plt.plot(df['price'])
+    # plt.plot(df['MA'])
+    # plt.plot(df['upper'])
+    # plt.plot(df['lower'])
     # plt.plot(df['b'])
     # plt.plot(df['BW'])
-    plt.show()
+    # plt.show()
     return df
 
 def cal_rsi(tbl,dur=14): #calculate Relative Strength Index from database table
@@ -265,12 +289,13 @@ def cal_rsi(tbl,dur=14): #calculate Relative Strength Index from database table
         U_avg = np.average(U)
         D_avg = np.average(D)
         rsi.append(100-100/(1+U_avg/D_avg))
-    print len(rsi)
-    plt.plot(rsi)
-    plt.show()
+    # print len(rsi)
+    # plt.plot(rsi)
+    # plt.show()
+    # csv
     temp = pd.DataFrame({'date':date,'rsi':rsi})
     csvfilename = tbl.split('_')[0]+'_rsi.csv'
-    temp.to_csv(csvfilename,index_label=False,index=False)
+    temp.to_csv("../static/js/indicator/"+csvfilename,index_label=False,index=False)
     return rsi, date
 
 def cal_dmi(tbl,dur=14):
@@ -312,10 +337,12 @@ def cal_dmi(tbl,dur=14):
     ADX = ADX[14:len(ADX)]
     DI_plus = DI_plus[14:len(DI_plus)]
     DI_minus = DI_minus[14:len(DI_minus)]
+
+    # csv
     date = date[14:len(date)]
     temp = pd.DataFrame({'date':date,'ADX':ADX,'DI_plus':DI_plus,'DI_minus':DI_minus})
     csvfilename = tbl.split('_')[0]+'_dmi.csv'
-    temp.to_csv(csvfilename,index_label=False,index=False)
+    temp.to_csv("../static/js/indicator/"+csvfilename,index_label=False,index=False)
 
     return ADX, DI_plus, DI_minus, date
 
@@ -342,24 +369,11 @@ def regression_predict(tbl, predict_range):
     return result
 
 if __name__ == '__main__':
-    # tbl = get_data_db("AMZN_historical")
-    # print type(tbl[1])
-    # cal_rsi("TWTR_historical",14)
-    # cal_dmi("TWTR_historical",14)
-    # cal_rsi("FB_historical",14)
-    # cal_dmi("FB_historical",14)
-    # cal_rsi("YHOO_historical",14)
-    # cal_dmi("YHOO_historical",14)
-    # table = get_data_db("AMZN_historical")
-    # close = zip(*table)[1]
-    # close = np.asarray(map(float,close[0:len(close)-1]))
-    # print lr.predict(close)
-    # amz_ave = getAverage(data)
-    # amz_low = getLowest(data)
-    # amz_high = getHighest(data)
-    # print amz_ave, amz_low, amz_high
-    # getCompanies("AMZN_historical")
-    # bollingerBands("AMZN_historical", 20)
+    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
+    for i in stock:
+        bollingerBands(i, 20)
+        cal_rsi(i,14)
+        cal_dmi(i, 14)
     print ann_predict("AMZN_historical", 10)
     print svm_predict("AMZN_historical", 10)
     print regression_predict("AMZN_historical",100)
