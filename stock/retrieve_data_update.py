@@ -16,7 +16,6 @@ from svm_manual import predict as predict_svm
 from django.utils import timezone
 
 date.today().strftime("%Y-%m-%d")
-# print Y,m,d
 
 def store_realtime_in_database(mydb, table,data):
     # data = [Realtime, Price, Volume]
