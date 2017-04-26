@@ -56,10 +56,11 @@ a:hover,a:focus{color:#74777b;}
 	background-size: 1000px 250px;	
 }
 
-.buttonsearch {
+.button {
 	background: transparent;
 	border: none !important;
 	font-size:0 ;
+	width:400px;
 }
 
 body .nomargin-bottom {
