@@ -86,7 +86,7 @@ a.rm, a.com {
 	width:890px;
 }
 .header {
-	background:#ee7600;
+	background:#333;
 	height:98px;
 }
 .header_resize {
@@ -254,7 +254,7 @@ ul.ex_menu li a:hover {
 }
 .footer {
 	color:#959595;
-	background-color:#ee7600;
+	background-color:#333;
 }
 .footer_resize {
 	margin:0 auto;
