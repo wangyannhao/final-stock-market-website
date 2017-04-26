@@ -33,26 +33,34 @@ stock_list = ['GOOG','TWTR', 'AMZN','FB','YHOO','AAPL','GPRO', 'INTC', 'NFLX', '
 stock_name = ['Google','Twitter', 'Amazon','Facebook','Yahoo','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
 
 def search(request):
-    stock = request.GET.get('put')
-    print stock
-    symbol = Share(stock)
-    stock_data = symbol.get_historical('2016-01-01',date.today().strftime("%Y-%m-%d"))
+	stock = request.GET.get('put')
+	flagvar = 0
+	try:
+		symbol = Share(stock)
+		stock_name = symbol.get_name()
+		stock_data = symbol.get_historical('2016-03-03','2017-03-03')
+		stock_df = pd.DataFrame(stock_data)
+		abbr = stock_df['Symbol'][0]
+		temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
+		temp['Date'] = stock_df['Date']
+		temp['High'] = stock_df['High']
+		temp['Low'] = stock_df['Low']
+		temp['Close_Price'] = stock_df['Adj_Close']
+		path = os.getcwd()
+		filepath = path+os.sep+'static'+os.sep+'js'+os.sep+'search'
+		os.chdir(filepath)
+		temp.to_csv(filepath+"/result.csv",index_label=False,index=False)
+		os.chdir(path)
+		flagvar =1
+	except:
+		flagvar = 0
+		abbr = ''
+		stock_name=''
+	context = {'flag':flagvar,
+			'abbr':abbr,
+			'stock_name':stock_name}
 
-    stock_df = pd.DataFrame(stock_data)
-    temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
-    temp['Date'] = stock_df['Date']
-    temp['High'] = stock_df['High']
-    temp['Low'] = stock_df['Low']
-    temp['Close_Price'] = stock_df['Adj_Close']
-    print temp
-    path = os.getcwd()
-    filepath = path+os.sep+'static'+os.sep+'js'+os.sep+'search'
-    os.chdir(filepath)
-    temp.to_csv(filepath+"/result.csv",index_label=False,index=False)
-    os.chdir(path)
-    # print stock_data
-
-    return render(request,'search2.html')
+	return render(request,'search2.html',context)
 
 def searchpage(request):
 	return render(request, 'searchpage.html')	 

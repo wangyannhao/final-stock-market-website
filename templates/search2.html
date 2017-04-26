@@ -21,7 +21,10 @@
                     <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
                     <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"/>
                 </svg>
-                <button class="button" id="button" type="submit"></button>
+                <button class="button" id="button" type="submit" style= "background: transparent;
+                  border: none !important;
+                  font-size:0 ;
+                  width:400px;"></button>
             </span>
         </section> 
        <!-- <button type="submit">      -->
@@ -132,8 +135,16 @@ body, html {
 //}
 </script>
 
-<div id="chartdiv" style=" width:100%; height:400px;"></div>   
-<h2 style="text-align:center">qwertyuiop</h2>
-</div> 
+{% if flag == 1 %}
+<br>
+<h3>{{abbr}}: {{stock_name}}</h3>
+<br>
+<div id="chartdiv" style=" width:100%; height:400px;"></div> 
+{% else %}
+<br><br><br>
+<h2><center> No such stock! </center></h2>  
+{% endif %}
+
+</div>
 {% endblock %}
 
