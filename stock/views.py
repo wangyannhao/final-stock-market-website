@@ -13,6 +13,9 @@ from . import analyzer
 import json_, sqlite3
 from decimal import Decimal
 import retrieve_data_update as rdu
+from yahoo_finance import Share
+import pandas as pd
+import csv,os
 #from .stock import neuralNetwork
 
 company =  {28:['GOOG','Google'],
@@ -28,6 +31,28 @@ company =  {28:['GOOG','Google'],
 		}
 stock_list = ['GOOG','TWTR', 'AMZN','FB','YHOO','AAPL','GPRO', 'INTC', 'NFLX', 'TSLA' ]
 stock_name = ['Google','Twitter', 'Amazon','Facebook','Yahoo','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
+
+def search(request):
+    stock = request.GET.get('put')
+    print stock
+    symbol = Share(stock)
+    stock_data = symbol.get_historical('2016-03-03','2017-03-03')
+
+    stock_df = pd.DataFrame(stock_data)
+    temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
+    temp['Date'] = stock_df['Date']
+    temp['High'] = stock_df['High']
+    temp['Low'] = stock_df['Low']
+    temp['Close_Price'] = stock_df['Adj_Close']
+    print temp
+    path = os.getcwd()
+    filepath = path+os.sep+'static'+os.sep+'js'+os.sep+'search'
+    os.chdir(filepath)
+    temp.to_csv(filepath+"/result.csv",index_label=False,index=False)
+    os.chdir(path)
+    # print stock_data
+
+    return render(request,'search2.html')
 
 def analysis(request):
 	data.bank_data.reverse()

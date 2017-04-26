@@ -17,18 +17,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-from stock.views import homeindex,analysis, sidebar , indicator, sidebarhome
+from stock.views import homeindex,analysis, sidebar , indicator, sidebarhome, search
 import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homeindex, name='home'),
-    url(r'^analysis/', analysis, name='khatra'),
     url(r'^home/(?P<company_id>[0-9]+)$', sidebarhome, name ='home'),
     url(r'^prediction/(?P<company_id>[0-9]+)$', sidebar, name ='prediction'),
     url(r'^indicator/(?P<company_id>[0-9]+)$', indicator, name ='indicator'),
     url(r'^indicator/',indicator,name='indicator'),
     url(r'^prediction/', sidebar, name='prediction'),
+    url(r'^analysis/', analysis, name='khatra'),
+    url(r'^search/$',search, name = 'search'),
 ]
 if settings.DEBUG:
     urlpatterns += (
