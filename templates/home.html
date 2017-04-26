@@ -27,65 +27,207 @@ h3 big{
 
 }
 </style>
-<h1>Nepse Index Analysis </h1>
-<div class="row">
-    <div class="col-sm-6">
+
+<div class="row" style="margin-left:-90px;">
+    <div class="col-sm-8">
+    <div id='chartdiv' style="width:100%; height:400px;"></div>
+    <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="{% static 'js/dataloader.min.js' %}"></script>
+    <style>
+    body, html {
+      font-family: Verdana;
+      font-size: 12px;
+    }
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+
+<script>
+    var id = {{individual.id}};
+    if(id == 28){var urls1 = "{% static 'js/indicator/GOOG_bollinger1.csv' %}";}
+    else if(id == 29 ){var urls1 = "{% static 'js/indicator/TWTR_bollinger1.csv' %}";}
+    else if(id == 30){var urls1 = "{% static 'js/indicator/AMZN_bollinger1.csv' %}";}
+    else if(id == 31){var urls1 = "{% static 'js/indicator/FB_bollinger1.csv' %}";}
+    else if(id == 32){var urls1 = "{% static 'js/indicator/YHOO_bollinger1.csv' %}";}
+    else if(id == 33){var urls1 = "{% static 'js/indicator/AAPL_bollinger1.csv' %}";}
+    else if(id == 34){var urls1 = "{% static 'js/indicator/GPRO_bollinger1.csv' %}";}
+    else if(id == 35){var urls1 = "{% static 'js/indicator/INTC_bollinger_bollinger1.csv' %}";}
+    else if(id == 36){var urls1 = "{% static 'js/indicator/NFLX_bollinger1.csv' %}";}
+    else if(id == 37){var urls1 = "{% static 'js/indicator/TSLA_bollinger1.csv' %}";}
+    
+    var chart = AmCharts.makeChart("chartdiv", {
+     "type": "serial",
+      "dataLoader": {
+      	
+      	"url":urls1,
+        "format": "csv",
+        "delimiter":',',
+        "useColumnNames":true,
+        "skip":1,
+        "showErrors": true,
+        "noStyles": true,
+        "async": true,
+        "load": function( options, chart ) {
+          // Here the data is already loaded and set to the chart.
+          // We can iterate through it and add proper graphs
+          for ( var key in chart.dataProvider[ 0 ] ) {
+            if ( chart.dataProvider[ 0 ].hasOwnProperty( key ) && key != chart.categoryField ) {
+              var graph = new AmCharts.AmGraph();
+              graph.valueField = key;
+              graph.type = "line";
+              graph.title = key,
+              graph.lineThickness = 2;
+              chart.addGraph( graph );
+            }
+          }
+        }
+    
+      },
+
+     "rotate": false,
+     "marginTop": 10,
+    //"dataDateFormat" = "YYYY-MM-DD";
+     "categoryField": "Date",
+     "categoryAxis": {
+       "gridAlpha": 0.07,
+       "axisColor": "#DADADA",
+       "startOnAxis": false,
+       "title": "Date",
+       "dateFormats":{'period':'DD','format':'MMM DD'}
+      },
+      
+     "valueAxes": [{
+       "stackType": "none",
+       "gridAlpha": 0.07,
+     }],
+     "graphs": [],
+     "legend": {
+       "position": "bottom",
+       "valueText": "[[value]]",
+       "valueWidth": 100,
+       "valueAlign": "left",
+       "equalWidths": false,
+       //"periodValueText": "total: [[value.sum]]"
+     },
+    "periodSelector": {
+          "position": "left",
+          "periods": [ {
+            "period": "MM",
+            "selected": true,
+            "count": 1,
+            "label": "1 month"
+          }, {
+            "period": "YYYY",
+            "count": 1,
+            "label": "1 year"
+          }, {
+            "period": "YTD",
+            "label": "YTD"
+          }, {
+            "period": "MAX",
+            "label": "MAX"
+          } ]
+        },
+
+     "chartCursor": {
+       "cursorAlpha": 0
+     },
+     "chartScrollbar": {
+       "color": "FFFFFF"
+     }
+
+    });
+//}
+</script>
+
+      <h1>{{current_select}} </h1>
 	  <div class="row-sm-6">
-		  <p><h5>highest stock price for this company{{individual.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>highest stock price for {{current_select}}: </h5> <h3> {{high}}</h3></p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>Average stock price for this company{{individual.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>Average stock price for this company{{current_select}}: </h5> <h3> {{avg}}</h3></p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>Lowest stock price for this company{{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>Lowest stock price for this company{{current_select}}: </h5> <h3> {{low}}</h3></p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p>
+		  <h5>Lower campanies list for {{current_select}}: </h5>
+		  {% for item in stock_name %}
+		   <h3> {{item}}</h3>
+		  {% endfor%}
+		  </p>
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
-      </div>
-	  <div class="row-sm-6">
-		  <p><h5>Nepse Index as of {{q1.yesterday_date}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
-      </div>
+	
     </div>
-    <div class="col-sm-6">
-      <p><h5>Predicted Nepse Index as of {{q1.date}}: </h5>
-		{% if query.increased_bool %}
-		<h3><small> {{q1.predicted_index}}</small></h3>
-		{% else %}
-		<h3> <big>{{q1.predicted_index}}</big></h3>
-		{% endif %}
+
+
+    <div class="col-sm-4">
+      <p><h5>Currrent time {{real_time.0.0}}: </h5>
       </p>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price for GOOG  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for GOOG : </h5> 
+		  <h3> real price:{{real_time.0.1}}</h3>
+		  <h3> real volume:{{real_time.0.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price for TWTR  {{campany2}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for TWTR : </h5>  		  
+		  <h3> real price:{{real_time.1.1}}</h3>
+		  <h3> real volume:{{real_time.1.2}}</h3>
+		  </p>
+
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price for AMZN  {{campany3}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for AMZN : </h5>  		  
+		  <h3> real price:{{real_time.2.1}}</h3>
+		  <h3> real volume:{{real_time.2.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price for FB  {{campany4}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for FB : </h5> 		  
+		  <h3> real price:{{real_time.3.1}}</h3>
+		  <h3> real volume:{{real_time.3.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price for YHOO {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for YHOO : </h5>  		  
+		  <h3> real price:{{real_time.4.1}}</h3>
+		  <h3> real volume:{{real_time.4.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for AAPL : </h5>  		  
+		  <h3> real price:{{real_time.5.1}}</h3>
+		  <h3> real volume:{{real_time.5.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for GPRO : </h5>  		  
+		  <h3> real price:{{real_time.6.1}}</h3>
+		  <h3> real volume:{{real_time.6.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for INTC : </h5>  		  
+		  <h3> real price:{{real_time.7.1}}</h3>
+		  <h3> real volume:{{real_time.7.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for NFLX : </h5>  		  
+		  <h3> real price:{{real_time.8.1}}</h3>
+		  <h3> real volume:{{real_time.8.2}}</h3>
+		  </p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>latest stock price  {{campany1}}: </h5> <h3> {{individual.yesterday_date}}</h3></p>
+		  <p><h5>latest stock price for TSLA : </h5> 		  
+		  <h3> real price:{{real_time.9.1}}</h3>
+		  <h3> real volume:{{real_time.9.2}}</h3>
+		  </p>
       </div>
 
     </div>

@@ -22,7 +22,7 @@ import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', homeindex, name='home1'),
+    url(r'^$', homeindex, name='home'),
     url(r'^analysis/', analysis, name='khatra'),
     url(r'^home/(?P<company_id>[0-9]+)$', sidebarhome, name ='home'),
     url(r'^prediction/(?P<company_id>[0-9]+)$', sidebar, name ='prediction'),

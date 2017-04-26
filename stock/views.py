@@ -16,16 +16,18 @@ import retrieve_data_update as rdu
 #from .stock import neuralNetwork
 
 company =  {28:['GOOG','Google'],
-			29:['TWTR','Twitte'],
+			29:['TWTR','Twitter'],
 			30:['AMZN','Amazon'],
 			31:['FB','facebook'],
 			32:['YHOO','Yahoo'],
 			33:['AAPL', 'Apple'],
 			34:['GPRO', 'Go Pro'],
-			35:['INTC', 'Intc'],
+			35:['INTC', 'Intel Corporation'],
 			36:['NFLX', 'Netflix'],
 			37:['TSLA', 'Tesla']
 		}
+stock_list = ['GOOG','TWTR', 'AMZN','FB','YHOO','AAPL','GPRO', 'INTC', 'NFLX', 'TSLA' ]
+stock_name = ['Google','Twitter', 'Amazon','Facebook','Yahoo','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
 
 def analysis(request):
 	data.bank_data.reverse()
@@ -84,8 +86,17 @@ def homeindex(request,company_id=28):
 	else:
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
+		avg, high, low, companies = query(company[c_id][0])
+		real_time = rdu.get_realtime_data(stock_list)
 		context = {
 			'individual':p,
+			'avg':avg,
+			'high':high,
+			'low':low,
+			'companies':companies,
+			'real_time':real_time,
+			'stock_name':stock_name,
+			'current_select':company[c_id][1]
 		}
 	return render(request, 'home.html', context) 
 
@@ -99,11 +110,19 @@ def sidebarhome(request,company_id=0):
 	else:
 		c_id = int (company_id)
 		p = Company.objects.get(pk=company_id) 
-		query(company[c_id][0]) 
+		avg, high, low, companies = query(company[c_id][0])
+		real_time = rdu.get_realtime_data(stock_list)
 		context = {
 			'individual':p,
-
+			'avg':avg,
+			'high':high,
+			'low':low,
+			'companies':companies,
+			'real_time':real_time,
+			'stock_name':stock_name,
+			'current_select':company[c_id][1]
 		}
+	print context
 	return render(request, 'home.html', context) 
 
 def indicator(request,company_id=0):
@@ -136,4 +155,4 @@ def query(name):
 	low = rdu.getLowest(tbl)
 	high = rdu.getHighest(tbl)
 	companies = rdu.getCompanies(name+'_historical')
-	print avg, high, low, companies
+	return avg, high, low, companies

@@ -78,22 +78,22 @@ def create_realtime_table(mydb, table):
     
 def get_historical(stock):
     symbol = Share(stock)
-    stock_data = symbol.get_historical('2017-03-03','2017-03-03')
+    stock_data = symbol.get_historical('2016-03-03','2017-03-03')
     stock_df = pd.DataFrame(stock_data)
-    dataFileName = stock + '_historical_2.csv'
+    dataFileName = stock + '_historical.csv'
     stock_df.to_csv(dataFileName)
 
-def get_realtime_data(stock,mydb,table):
-    symbol = Share(stock)
-    symbol.refresh()
-    price  = symbol.get_price()
-    volume = symbol.get_volume()
-    date_time = str(datetime.now())[:19]
-    data=[date_time, price, volume]
-    print stock, data
-    store_realtime_in_database(mydb,table, data) 
-    files = stock+'_realtime_1.csv'
-    store_realtime_in_csv(files, data)
+# def get_realtime_data(stock,mydb,table):
+    # symbol = Share(stock)
+    # symbol.refresh()
+    # price  = symbol.get_price()
+    # volume = symbol.get_volume()
+    # date_time = str(datetime.now())[:19]
+    # data=[date_time, price, volume]
+    # print stock, data
+    # store_realtime_in_database(mydb,table, data) 
+    # files = stock+'_realtime_1.csv'
+    # store_realtime_in_csv(files, data)
 
 def get_realtime_from_url(stock,table):
     urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv",stock+"_realtime_url.csv")
@@ -115,6 +115,25 @@ def get_realtime_from_url(stock,table):
         mydb.commit()
         cursor.close()
 
+def get_realtime_data(stock_list):
+    data_list = []
+    for stock in stock_list:
+        urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv",stock+"_realtime_url.csv")
+        csv_data = stock+"_realtime_url.csv"
+        with open(csv_data) as f:
+            reader = csv.reader(f)
+            for row in reader:
+                time = str(datetime.now())
+                price = str(row[1])
+                volume = str(row[8])
+                data = [time, price, volume]
+                data_list.append(data)
+    return data_list
+
+
+
+
+
 def timer(times,stock,table):
     now = datetime.now()
     close_time = now.replace(hour=16, minute=00, second = 0, microsecond = 0) # set stop time
@@ -130,11 +149,11 @@ def timer(times,stock,table):
 
 def collect_data():
     # change retrieve type here
-    historical = 0     
+    historical = 1  
     mydb = MySQLdb.connect(host = 'localhost',
            user='root',
-           passwd='123456',
-           db='sys')
+           passwd='93112525',
+           db='test')
    
     stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
     table_realtime = {'AAPL':'AAPL_realtime',
@@ -225,10 +244,10 @@ def getHighest(data):
 def getCompanies(tbl):
     data = get_data_db(tbl)
     low = getLowest(data)
-    table_historical = {'GOOG_historical','YHOO_historical','FB_historical','AMZN_historical','TWTR_historical'}
+    table_historical = {'GOOG','YHOO','FB','AMZN','TWTR','GPRO','INTC','NFLX','TSLA'}
     companies = []
     for c in table_historical:
-        tmp = getAverage(get_data_db(c))
+        tmp = getAverage(get_data_db(c+'_historical'))
         if tmp < low:
             companies.append(c)
     # print companies
@@ -374,14 +393,15 @@ def regression_predict(tbl, predict_range):
     return result,close[len(close)-1], date[len(date)-1],date[len(date)-2]
 
 if __name__ == '__main__':
-    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
-    for i in stock:
-        bollingerBands(i, 20)
-        cal_rsi(i,14)
-        cal_dmi(i, 14)
-    print ann_predict("AMZN_historical", 10)
-    print svm_predict("AMZN_historical", 10)
-    print regression_predict("AMZN_historical",100)
+    # stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
+    # for i in stock:
+    #     bollingerBands(i, 20)
+    #     cal_rsi(i,14)
+    #     cal_dmi(i, 14)
+    # print ann_predict("AMZN_historical", 10)
+    # print svm_predict("AMZN_historical", 10)
+    # print regression_predict("AMZN_historical",100)
+    collect_data()
 
 
 
