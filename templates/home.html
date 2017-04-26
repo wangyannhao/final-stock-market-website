@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% include 'sidebarhome.html' %}
 <div class="mainbar">
-	<style>	
+  <style> 
 th, td {
     padding: 15px;
 }
@@ -11,25 +11,65 @@ img{
   border: none;
 }
 h3 {
-	font: 18px Arial, Helvetica, sans-serif;	
-	margin: 0px;
+  font: 18px Arial, Helvetica, sans-serif;  
+  margin: 0px;
 }
 h3 small{
-	font: 18px Arial, Helvetica, sans-serif;
-	margin: 0px;
-	color:#08722A;
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#08722A;
 
 }
 h3 big{
-	font: 18px Arial, Helvetica, sans-serif;
-	margin: 0px;
-	color:#721608;
+  font: 18px Arial, Helvetica, sans-serif;
+  margin: 0px;
+  color:#721608;
 
+}
+
+
+hr.myhrline{
+     margin: 10px;
+}
+
+h3 {
+  font: 18px Arial, Helvetica, sans-serif;  
+  margin: 0px;
+}
+
+
+h33 {
+  font-size: 0.8em ;
+  color:black;
+  margin-top:-10px;
+}
+
+h9 {
+  font-size: 1.2em ;
+  font-weight:700;
+  color:blue;
+}
+
+h5 {
+  font-size: 0.8em ;
+  color:red;
+  margin-top:-1px;
+}
+
+
+h4{
+  font: 28px ;
+}
+
+h7 {
+    border-style: solid;
+    border-width: 100px;
+    color:#721608;
 }
 </style>
 
 <div class="row" style="margin-left:-90px;">
-    <div class="col-sm-8">
+    <div class="col-sm-9">
     <h1 style="font-weight: 700">{{company_name.1}} </h1>
     <div id='chartdiv' style="width:100%; height:400px;"></div>
     <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -167,72 +207,86 @@ h3 big{
 </div>
 
 
-    <div class="col-sm-4">
-    <div class="gadget">
-      <p><h5>Currrent time {{real_time.0.0}}: </h5>
-      </p>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for GOOG : </h5> 
-		  <h3> real price:{{real_time.0.1}}</h3>
-		  <h3> real volume:{{real_time.0.2}}</h3>
-		  </p>
-      </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for TWTR : </h5>  		  
-		  <h3> real price:{{real_time.1.1}}</h3>
-		  <h3> real volume:{{real_time.1.2}}</h3>
-		  </p>
+        <div class="col-sm-3">
+    <!--<div class="gadget">-->
+      <h7>Last Update: {{real_time.0.0}}: </h7>
+    <hr class="myhrline"/>
+    <div class="row-sm-6">
+      
+      <h9>GOOG </h9> 
+      <br><h33> {{real_time.0.1}}</h33> </br>
+      <h5> {{real_time.0.2}}</h5>
 
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for AMZN : </h5>  		  
-		  <h3> real price:{{real_time.2.1}}</h3>
-		  <h3> real volume:{{real_time.2.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+    
+      <h9>TWTR </h9> 
+      <br><h33> {{real_time.1.1}}</h33> </br>
+      <h5> {{real_time.1.2}}</h5>
+
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for FB : </h5> 		  
-		  <h3> real price:{{real_time.3.1}}</h3>
-		  <h3> real volume:{{real_time.3.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      
+      <h9>AMZN </h9> 
+      <br><h33> {{real_time.2.1}}</h33> </br>
+      <h5> {{real_time.2.2}}</h5>
+
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for YHOO : </h5>  		  
-		  <h3> real price:{{real_time.4.1}}</h3>
-		  <h3> real volume:{{real_time.4.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      
+      <h9>FB </h9> 
+      <br><h33> {{real_time.3.1}}</h33> </br>
+      <h5> {{real_time.3.2}}</h5>
+      
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for AAPL : </h5>  		  
-		  <h3> real price:{{real_time.5.1}}</h3>
-		  <h3> real volume:{{real_time.5.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      
+      <h9>YHOO </h9> 
+      <br><h33> {{real_time.4.1}}</h33> </br>
+      <h5> {{real_time.4.2}}</h5>
+      
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for GPRO : </h5>  		  
-		  <h3> real price:{{real_time.6.1}}</h3>
-		  <h3> real volume:{{real_time.6.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+
+      <h9>AAPL </h9> 
+      <br><h33> {{real_time.5.1}}</h33> </br>
+      <h5> {{real_time.5.2}}</h5>
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for INTC : </h5>  		  
-		  <h3> real price:{{real_time.7.1}}</h3>
-		  <h3> real volume:{{real_time.7.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h9>GPRO </h9> 
+      <br><h33> {{real_time.6.1}}</h33> </br>
+      <h5> {{real_time.6.2}}</h5>
+      
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for NFLX : </h5>  		  
-		  <h3> real price:{{real_time.8.1}}</h3>
-		  <h3> real volume:{{real_time.8.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h9>INTC </h9> 
+      <br><h33> {{real_time.7.1}}</h33> </br>
+      <h5> {{real_time.7.2}}</h5>
+      
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>latest stock price for TSLA : </h5> 		  
-		  <h3> real price:{{real_time.9.1}}</h3>
-		  <h3> real volume:{{real_time.9.2}}</h3>
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h9>NFLX </h9> 
+      <br><h33> {{real_time.8.1}}</h33> </br>
+      <h5> {{real_time.8.2}}</h5>
+      
       </div>
-	</div>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h9>TSLA </h9> 
+      <br><h33> {{real_time.9.1}}</h33> </br>
+      <h5> {{real_time.9.2}}</h5>
+      
+      </div>
+      <hr class="myhrline"/>
+  <!--</div>-->
     </div>
 	
 
