@@ -130,10 +130,6 @@ def get_realtime_data(stock_list):
                 data_list.append(data)
     return data_list
 
-
-
-
-
 def timer(times,stock,table):
     now = datetime.now()
     close_time = now.replace(hour=16, minute=00, second = 0, microsecond = 0) # set stop time
@@ -152,8 +148,8 @@ def collect_data():
     historical = 1  
     mydb = MySQLdb.connect(host = 'localhost',
            user='root',
-           passwd='123456',
-           db='sys')
+           passwd='93112525',
+           db='test')
    
     stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
     table_realtime = {'AAPL':'AAPL_realtime',
@@ -203,8 +199,8 @@ def collect_data():
 def get_data_db(table):
     mydb = MySQLdb.connect(host = 'localhost',
        user='root',
-       passwd='123456',
-       db='sys')
+       passwd='93112525',
+       db='test')
     cursor = mydb.cursor()
     cursor.execute("SELECT * from "+table)
     tbl = cursor.fetchall()
@@ -376,11 +372,11 @@ def ann_predict(tbl, predict_range=30):
 def svm_predict(tbl, predict_range):
     table = get_data_db(tbl)
     date = zip(*table)[0]
-    date = date[1:len(date)-1]
+    date = date[0:len(date)-1]
     close = zip(*table)[1]
     close = np.asarray(map(float,close[0:len(close)-1]))
     result = predict_svm(close, predict_range)
-    return result, date
+    return result
 
 def regression_predict(tbl, predict_range):
     table = get_data_db(tbl)

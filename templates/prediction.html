@@ -28,21 +28,35 @@ h3 big{
   margin: 0px;
   color:#721608;
 }
-
 </style>
+
 <div class="mainbar">
 {% if individual %}
 <h1 style="margin-left:-60px;font-weight:700">{{company_name.0}}({{company_name.1}})</h1>
 <div class="row" style="margin-left:-70px;width:800px">
     <div class="col-sm-6">
-      <p><h5>Closed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{individual.previous_closing_price}}</h3></p>    
+      <p><h5>Closed price of {{company_name.1}} as of {{today}}: </h5> <h3> {{last}}</h3></p> 
+       <p><h5>Predicted Trend using ANN: </h5>
+        {% if ann_pred %}
+        <h3><small> Will Rise</small></h3>
+        {% else %}
+        <h3> <big>Will Fall</big></h3>
+        {% endif %}
+      </p>  
     </div>
     <div class="col-sm-6">
-      <p><h5>Predicted Close Price as of {{individual.date}}: </h5>
-        {% if individual.increased_bool %}
-        <h3><small> {{individual.predicted_price}}</small></h3>
+      <p><h5>Predicted Close Price as of {{tomorrow}}: </h5>
+        {% if delta %}
+        <h3><small> {{pred}}</small></h3>
         {% else %}
-        <h3> <big>{{individual.predicted_price}}</big></h3>
+        <h3> <big>{{pred}}</big></h3>
+        {% endif %}
+      </p>
+       <p><h5>Predicted Trend using SVM: </h5>
+        {% if svm_pred %}
+        <h3><small> Will Rise</small></h3>
+        {% else %}
+        <h3> <big>Will Fall</big></h3>
         {% endif %}
       </p>
     </div>
@@ -50,7 +64,7 @@ h3 big{
 </div>    
 <div class="row" style="margin-left:-70px;width:700px">
     <div id="chartdiv" style="width:100%; height:400px;"></div>
-    <h8><center>Fig : Charts showing high,low and closed prices of {{individual.name}} </center> </h8>
+    <h8><center>Fig : Charts showing high,low and closed prices of {{company_name.1}} </center> </h8>
 </div>
 <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>

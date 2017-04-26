@@ -62,6 +62,9 @@ def sidebar(request,company_id=0):
 		p = Company.objects.get(pk=company_id)
 		print company[c_id][0]
 		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",15)
+		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',15)
+		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",15)
+
 		if (pred-last>0): 
 			delta = 1
 		else: 
@@ -73,7 +76,9 @@ def sidebar(request,company_id=0):
 			'pred':pred,
 			'last':last,
 			'tomorrow':tomorrow,
-			'delta': delta
+			'delta': delta,
+			'svm_pred':svm_pred,
+			'ann_pred':ann_pred
 		}
 	return render(request, 'prediction.html', context) 
 
