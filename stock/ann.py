@@ -99,5 +99,6 @@ def predict(close,predict_range=10):
     else:
         return -1
 
+# def predict_longterm(close, ):
 
 

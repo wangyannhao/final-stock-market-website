@@ -397,7 +397,6 @@ def regression_predict(tbl, predict_range):
     close = zip(*table)[1]
     close = np.asarray(map(float,close[0:len(close)-1]))
     result = predict_regression(close,predict_range)
-    
     return result,close[len(close)-1], date[len(date)-1],date[len(date)-2]
 
 # if __name__ == '__main__':

@@ -146,17 +146,17 @@ h3 big{
 </script>
       <!-- <h1>{{current_select}} </h1> -->
 	  <div class="row-sm-6">
-		  <p><h5>highest stock price for {{company_name.1}}: </h5> <h3> {{high}}</h3></p>
+		  <p><h5>Highest price in last ten days: </h5> <h3> {{high}}</h3></p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>Average stock price for this company{{company_name.1}}: </h5> <h3> {{avg}}</h3></p>
+		  <p><h5>Average stock price for last year: </h5> <h3> {{avg}}</h3></p>
       </div>
 	  <div class="row-sm-6">
-		  <p><h5>Lowest stock price for this company{{company_name.1}}: </h5> <h3> {{low}}</h3></p>
+		  <p><h5>Lowest stock price for last year: </h5> <h3> {{low}}</h3></p>
       </div>
 	  <div class="row-sm-6">
 		  <p>
-		  <h5>Lower campanies list for {{company_name.1}}: </h5>
+		  <h5>Companies with average price lower than lowest price of {{company_name.1}}: </h5>
 		  {% for item in companies %}
 		   <h3> {{item}}</h3>
 		  {% endfor%}
