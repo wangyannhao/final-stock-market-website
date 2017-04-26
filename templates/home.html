@@ -48,16 +48,16 @@ h3 big{
 
 <script>
     var id = {{individual.id}};
-    if(id == 28){var urls1 = "{% static 'js/indicator/GOOG_bollinger1.csv' %}";}
-    else if(id == 29 ){var urls1 = "{% static 'js/indicator/TWTR_bollinger1.csv' %}";}
-    else if(id == 30){var urls1 = "{% static 'js/indicator/AMZN_bollinger1.csv' %}";}
-    else if(id == 31){var urls1 = "{% static 'js/indicator/FB_bollinger1.csv' %}";}
-    else if(id == 32){var urls1 = "{% static 'js/indicator/YHOO_bollinger1.csv' %}";}
-    else if(id == 33){var urls1 = "{% static 'js/indicator/AAPL_bollinger1.csv' %}";}
-    else if(id == 34){var urls1 = "{% static 'js/indicator/GPRO_bollinger1.csv' %}";}
-    else if(id == 35){var urls1 = "{% static 'js/indicator/INTC_bollinger_bollinger1.csv' %}";}
-    else if(id == 36){var urls1 = "{% static 'js/indicator/NFLX_bollinger1.csv' %}";}
-    else if(id == 37){var urls1 = "{% static 'js/indicator/TSLA_bollinger1.csv' %}";}
+    if(id == 28){var urls1 = "{% static 'js/csv/GOOG.csv' %}";}
+    else if(id == 29 ){var urls1 = "{% static 'js/csv/TWTR.csv' %}";}
+    else if(id == 30){var urls1 = "{% static 'js/csv/AMZN.csv' %}";}
+    else if(id == 31){var urls1 = "{% static 'js/csv/FB.csv' %}";}
+    else if(id == 32){var urls1 = "{% static 'js/csv/YHOO.csv' %}";}
+    else if(id == 33){var urls1 = "{% static 'js/csv/AAPL.csv' %}";}
+    else if(id == 34){var urls1 = "{% static 'js/csv/GPRO.csv' %}";}
+    else if(id == 35){var urls1 = "{% static 'js/csv/INTC.csv' %}";}
+    else if(id == 36){var urls1 = "{% static 'js/csv/NFLX.csv' %}";}
+    else if(id == 37){var urls1 = "{% static 'js/csv/TSLA.csv' %}";}
     
     var chart = AmCharts.makeChart("chartdiv", {
      "type": "serial",
@@ -143,7 +143,6 @@ h3 big{
     });
 //}
 </script>
-
       <!-- <h1>{{current_select}} </h1> -->
 	  <div class="row-sm-6">
 		  <p><h5>highest stock price for {{current_select}}: </h5> <h3> {{high}}</h3></p>

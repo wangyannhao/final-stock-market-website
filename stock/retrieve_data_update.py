@@ -82,6 +82,13 @@ def get_historical(stock):
     stock_df = pd.DataFrame(stock_data)
     dataFileName = stock + '_historical.csv'
     stock_df.to_csv(dataFileName)
+    temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
+    temp['Date'] = stock_df['Date']
+    temp['High'] = stock_df['High']
+    temp['Low'] = stock_df['Low']
+    temp['Close_Price'] = stock_df['Adj_Close']
+    dataFileName = stock +'.csv'
+    temp.to_csv('../static/js/csv/'+dataFileName,index_label=False,index=False)
 
 # def get_realtime_data(stock,mydb,table):
     # symbol = Share(stock)
