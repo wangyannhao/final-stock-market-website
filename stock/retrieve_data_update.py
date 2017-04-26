@@ -155,8 +155,8 @@ def collect_data():
     historical = 1  
     mydb = MySQLdb.connect(host = 'localhost',
            user='root',
-           passwd='js2294',
-           db='test')
+           passwd='123456',
+           db='sys')
    
     stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
     table_realtime = {'AAPL':'AAPL_realtime',
@@ -206,8 +206,8 @@ def collect_data():
 def get_data_db(table):
     mydb = MySQLdb.connect(host = 'localhost',
        user='root',
-       passwd='js2294',
-       db='test')
+       passwd='123456',
+       db='sys')
     cursor = mydb.cursor()
     cursor.execute("SELECT * from "+table)
     tbl = cursor.fetchall()
