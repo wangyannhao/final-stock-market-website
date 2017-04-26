@@ -10,3 +10,7 @@ minor/urls.pyc
 *.pyc
 
 *.csv
+
+*.pyc
+
+stock/views.pyc

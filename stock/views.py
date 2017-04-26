@@ -157,6 +157,61 @@ def indicator(request,company_id=0):
 			'id':c_id,
 			'company_name':company[c_id]
 		}
+	path = os.getcwd()
+	filepath = path+os.sep+'static'+os.sep+'js'+os.sep+'indicator'
+	os.chdir(filepath)
+	filename = company[int(company_id)][0]
+	#bollinger csv
+	b1csvfile = filename+'_bollinger1.csv'
+	f = open(b1csvfile)
+	lines = f.readlines()[-20:]
+	price_col = []
+	lower_col = []
+	upper_col = []
+	for each in lines:
+		each = each.split(',')
+		price = float(each[2])
+		lower = float(each[3])
+		upper = float(each[4][:-1])
+		price_col.append(price)
+		lower_col.append(lower)
+		upper_col.append(upper)
+	price_min = min(price_col)
+	price_max = max(price_col)
+	lower_min = min(lower_col)
+	upper_max = max(upper_col)
+	if price_max<=lower_min:
+		context['b1_advice'] = 1
+	elif price_min>=upper_max:
+		context['b1_advice'] = 2
+	else:
+		context['b1_advice'] = 3
+	#rsi csv file
+	rsicsvfile = filename+'_rsi.csv'
+	f = open(rsicsvfile)
+	rsi_var = f.readlines()[-1].split(',')[-1]
+	rsi_var = float(rsi_var[:-1])
+	if rsi_var<30:
+		context['rsi_advice'] = 1
+	elif rsi_var>70:
+		context['rsi_advice'] = 2
+	else:
+		context['rsi_advice'] = 3
+	#dmi csv
+	dmicsvfile = filename+'_dmi.csv'
+	f = open(dmicsvfile)
+	line = f.readlines()[-1].split(',')
+	ADX = float(line[0])
+	DI_minus = float(line[1])
+	DI_plus = float(line[2])
+	if ADX>25:
+		if DI_plus>=DI_minus:
+			context['dmi_advice'] = 1
+		else:
+			context['dmi_advice'] = 2
+	else:
+		context['dim_advice'] = 3
+	os.chdir(path)
 	return render(request, 'indicator.html', context) 
 
 
