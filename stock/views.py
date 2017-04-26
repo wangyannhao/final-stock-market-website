@@ -74,8 +74,8 @@ def sidebar(request,company_id=0):
 		}
 	else:
 		c_id = int (company_id)
-		p = Company.objects.get(pk=company_id)
-		print company[c_id][0]
+		# p = Company.objects.get(pk=company_id)
+		# print company[c_id][0]
 		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",15)
 		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',15)
 		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",15)
@@ -86,7 +86,7 @@ def sidebar(request,company_id=0):
 			delta = 0
 		context = {
 			'company_name':company[c_id],
-			'individual':p,
+			'id':c_id,
 			'today': today,
 			'pred':pred,
 			'last':last,
@@ -105,18 +105,18 @@ def homeindex(request,company_id=28):
 		}
 	else:
 		c_id = int (company_id)
-		p = Company.objects.get(pk=company_id) 
+		# p = Company.objects.get(pk=company_id) 
 		avg, high, low, companies = query(company[c_id][0])
 		real_time = rdu.get_realtime_data(stock_list)
 		context = {
-			'individual':p,
+			'id':c_id,
 			'avg':avg,
 			'high':high,
 			'low':low,
 			'companies':companies,
 			'real_time':real_time,
 			'stock_name':stock_name,
-			'current_select':company[c_id][1]
+			'company_name':company[c_id],
 		}
 	return render(request, 'home.html', context) 
 
@@ -129,18 +129,18 @@ def sidebarhome(request,company_id=0):
 		}
 	else:
 		c_id = int (company_id)
-		p = Company.objects.get(pk=company_id) 
+		# p = Company.objects.get(pk=company_id) 
 		avg, high, low, companies = query(company[c_id][0])
 		real_time = rdu.get_realtime_data(stock_list)
 		context = {
-			'individual':p,
+			'id':c_id,
 			'avg':avg,
 			'high':high,
 			'low':low,
 			'companies':companies,
 			'real_time':real_time,
 			'stock_name':stock_name,
-			'current_select':company[c_id][1]
+			'company_name':company[c_id]
 		}
 	print context
 	return render(request, 'home.html', context) 
@@ -153,9 +153,10 @@ def indicator(request,company_id=0):
 		}
 	else:
 		c_id = int (company_id)
-		p = Company.objects.get(pk=company_id) 
+		# p = Company.objects.get(pk=company_id) 
 		context = {
-			'individual':p
+			'id':c_id,
+			'company_name':company[c_id]
 		}
 	return render(request, 'indicator.html', context) 
 

@@ -33,8 +33,8 @@ h3 big{
 
 
 <div class="mainbar" >
-{% if individual %}
-<h1 style="font-weight: 700">{{individual.name}}({{individual.abbr}})</h1>
+{% if id %}
+<h1 style="font-weight: 700">{{company_name.0}} ({{company_name.1}})</h1>
 
 
 <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -52,7 +52,7 @@ h3 big{
     </style>
 
 <script>
-    var id = {{individual.id}};
+    var id = {{id}};
     if(id == 28){var urls1 = "{% static 'js/indicator/GOOG_bollinger1.csv' %}";}
     else if(id == 29 ){var urls1 = "{% static 'js/indicator/TWTR_bollinger1.csv' %}";}
     else if(id == 30){var urls1 = "{% static 'js/indicator/AMZN_bollinger1.csv' %}";}
@@ -150,7 +150,7 @@ h3 big{
 </script>
 
 <script>
-    var id = {{individual.id}};
+    var id = {{id}};
     if(id == 28){var urls2 = "{% static 'js/indicator/GOOG_bollinger2.csv' %}";}
     else if(id == 29 ){var urls2 = "{% static 'js/indicator/TWTR_bollinger_bollinger2.csv' %}";}
     else if(id == 30){var urls2 = "{% static 'js/indicator/AMZN_bollinger2.csv' %}";}
@@ -248,7 +248,7 @@ h3 big{
 </script>
 
 <script>
-    var id = {{individual.id}};
+    var id = {{id}};
     if(id == 28){var urls3 = "{% static 'js/indicator/GOOG_rsi.csv' %}";}
     else if(id == 29 ){var urls3 = "{% static 'js/indicator/TWTR_rsi.csv' %}";}
     else if(id == 30){var urls3 = "{% static 'js/indicator/AMZN_rsi.csv' %}";}
@@ -346,7 +346,7 @@ h3 big{
 </script>
 
 <script>
-    var id = {{individual.id}};
+    var id = {{id}};
     if(id == 28){var urls4 = "{% static 'js/indicator/GOOG_dmi.csv' %}";}
     else if(id == 29 ){var urls4 = "{% static 'js/indicator/TWTR_dmi.csv' %}";}
     else if(id == 30){var urls4 = "{% static 'js/indicator/AMZN_dmi.csv' %}";}
@@ -446,18 +446,18 @@ h3 big{
 <!-- <indicator style="margin-left: -120px;"> -->
     <h5><b>Indicator: Bollinger bands</b></h5>
     <div id="chartdiv" style="width:100%; height:400px;"></div>
-    <h8><center>Fig1 : Charts showing price, MA, upper and low of {{individual.name}} </center> </h8>
+    <h8><center>Fig1 : Charts showing price, MA, upper and low of {{company_name.1}} </center> </h8>
     <p>
     <div id="chartdiv1" style="width:100%; height:400px;"></div>
-    <h8><center>Fig2 : Charts showing b and BW of {{individual.name}} </center> </h8>
+    <h8><center>Fig2 : Charts showing b and BW of {{company_name.1}} </center> </h8>
     <p>
     <h5><b>Indicator: Relative Strength Index</b></h5>
     <div id="chartdiv2" style="width:100%; height:400px;"></div>
-    <h8><center>Fig3 : Charts showing rsi of {{individual.name}} </center> </h8>
+    <h8><center>Fig3 : Charts showing rsi of {{company_name.1}} </center> </h8>
     <p>
     <h5><b>Indicator: Directional Movement Index</b></h5>
     <div id="chartdiv3" style="width:100%; height:400px;"></div>
-    <h8><center>Fig4 : Charts showing ADX, +DI and -DI of {{individual.name}} </center> </h8>
+    <h8><center>Fig4 : Charts showing ADX, +DI and -DI of {{company_name.1}} </center> </h8>
     
 
 
