@@ -51,7 +51,16 @@ a:hover,a:focus{color:#74777b;}
 	font-size: 0.65em;
 }
 
-.bgcolor-10 { background: url(background.jpg); }
+.bgcolor-10 { 
+	background: url(background.jpg); 
+	background-size: 1000px 250px;	
+}
+
+.buttonsearch {
+	background: transparent;
+	border: none !important;
+	font-size:0 ;
+}
 
 body .nomargin-bottom {
 	margin-bottom: 0;
