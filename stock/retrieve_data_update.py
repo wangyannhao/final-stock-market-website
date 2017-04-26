@@ -257,6 +257,8 @@ def getCompanies(tbl):
         if tmp < low:
             companies.append(c)
     # print companies
+    print "hahah"
+    print companies
     return companies
     
 def bollingerBands(tbl, dur = 20):

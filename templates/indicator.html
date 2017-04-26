@@ -34,9 +34,8 @@ h3 big{
 
 <div class="mainbar" >
 {% if id %}
-<h1 style="font-weight: 700">{{company_name.0}} ({{company_name.1}})</h1>
-
-
+<h1 style="font-weight: 700;margin-left: -70px">{{company_name.0}} ({{company_name.1}})</h1>
+<div class="col-sm-10" style="margin-left:-70px;">
 <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>
     <script src="{% static 'js/dataloader.min.js' %}"></script>
@@ -444,25 +443,25 @@ h3 big{
 </script>
 
 <!-- <indicator style="margin-left: -120px;"> -->
-    <h5><b>Indicator: Bollinger bands</b></h5>
+    <h5><b>Bollinger bands</b></h5>
     <div id="chartdiv" style="width:100%; height:400px;"></div>
     <h8><center>Fig1 : Charts showing price, MA, upper and low of {{company_name.1}} </center> </h8>
     <p>
     <div id="chartdiv1" style="width:100%; height:400px;"></div>
     <h8><center>Fig2 : Charts showing b and BW of {{company_name.1}} </center> </h8>
     <p>
-    <h5><b>Indicator: Relative Strength Index</b></h5>
+    <h5><b>Relative Strength Index</b></h5>
     <div id="chartdiv2" style="width:100%; height:400px;"></div>
     <h8><center>Fig3 : Charts showing rsi of {{company_name.1}} </center> </h8>
     <p>
-    <h5><b>Indicator: Directional Movement Index</b></h5>
+    <h5><b>Directional Movement Index</b></h5>
     <div id="chartdiv3" style="width:100%; height:400px;"></div>
     <h8><center>Fig4 : Charts showing ADX, +DI and -DI of {{company_name.1}} </center> </h8>
     
 
 
 {% endif%}
-
+</div>
 </div>
 
 {% endblock %}

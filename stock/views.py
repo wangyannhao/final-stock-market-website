@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from  . import data
-from  . import data1
+# from  . import data
+# from  . import data1
 from datetime import date
 from django.utils import timezone
 # Create your views here.
 #from .models import Today
 from . models import Company
-from .models import Nepse
 from . import analyzer
 import json_, sqlite3
 from decimal import Decimal
@@ -167,4 +166,5 @@ def query(name):
 	low = rdu.getLowest(tbl)
 	high = rdu.getHighest(tbl)
 	companies = rdu.getCompanies(name+'_historical')
+	# print "zhangxin ",companies
 	return avg, high, low, companies

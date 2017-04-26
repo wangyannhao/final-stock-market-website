@@ -21,16 +21,3 @@ class Company(models.Model):
 	def __str__(self):
 		return self.abbr
 
-class Nepse(models.Model):
-	date = models.DateField(auto_now_add=True, auto_now=False)
-	index = models.DecimalField(default=0.00, max_digits = 7, decimal_places = 3)
-	predicted_index = models.DecimalField(default=0.0, max_digits = 7, decimal_places = 3)
-	difference = models.DecimalField(default = 0.0, max_digits = 7, decimal_places = 3)
-	previous_index = models.DecimalField(default = 0.00, max_digits = 7, decimal_places = 3)
-	yesterday_date = models.DateField(auto_now_add = True, auto_now = False)
-	increased_bool = models.BooleanField(default = False)
-	
-	def __str__(self):
-		return self.predicted_index
-
-		
