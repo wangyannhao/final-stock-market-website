@@ -151,7 +151,7 @@ h3 big{
 <script>
     var id = {{id}};
     if(id == 28){var urls2 = "{% static 'js/indicator/GOOG_bollinger2.csv' %}";}
-    else if(id == 29 ){var urls2 = "{% static 'js/indicator/TWTR_bollinger_bollinger2.csv' %}";}
+    else if(id == 29 ){var urls2 = "{% static 'js/indicator/TWTR_bollinger2.csv' %}";}
     else if(id == 30){var urls2 = "{% static 'js/indicator/AMZN_bollinger2.csv' %}";}
     else if(id == 31){var urls2 = "{% static 'js/indicator/FB_bollinger2.csv' %}";}
     else if(id == 32){var urls2 = "{% static 'js/indicator/YHOO_bollinger2.csv' %}";}
@@ -453,6 +453,7 @@ h3 big{
     <div id="chartdiv" style="width:100%; height:400px;"></div>
     <h8><center>Fig1 : Charts showing price, MA, upper and low of {{company_name.1}} </center> </h8>
     <br>
+
     <div id="chartdiv1" style="width:100%; height:400px;"></div>
     <h8><center>Fig2 : Charts showing b and BW of {{company_name.1}} </center> </h8>
     <br>
