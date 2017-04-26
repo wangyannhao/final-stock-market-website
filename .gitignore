@@ -8,3 +8,5 @@ minor/urls.pyc
 *.pyc
 
 *.pyc
+
+*.csv

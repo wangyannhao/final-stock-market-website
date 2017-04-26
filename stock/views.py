@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 # from  . import data
 # from  . import data1
-from datetime import date
+from datetime import date,datetime
 from django.utils import timezone
 # Create your views here.
 #from .models import Today
@@ -37,7 +37,7 @@ def search(request):
 	try:
 		symbol = Share(stock)
 		stock_name = symbol.get_name()
-		stock_data = symbol.get_historical('2016-03-03','2017-03-03')
+		stock_data = symbol.get_historical('2016-01-01',date.today().strftime("%Y-%m-%d"))
 		stock_df = pd.DataFrame(stock_data)
 		abbr = stock_df['Symbol'][0]
 		temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
