@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-from stock.views import homeindex,analysis, sidebar , indicator, sidebarhome, search
+from stock.views import homeindex,searchpage, sidebar , indicator, sidebarhome, search
 import settings
 
 urlpatterns = [
@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^indicator/(?P<company_id>[0-9]+)$', indicator, name ='indicator'),
     url(r'^indicator/',indicator,name='indicator'),
     url(r'^prediction/', sidebar, name='prediction'),
-    url(r'^analysis/', analysis, name='khatra'),
+    url(r'^searchpage/', searchpage, name='searchpage'),
     url(r'^search/$',search, name = 'search'),
 ]
 if settings.DEBUG:

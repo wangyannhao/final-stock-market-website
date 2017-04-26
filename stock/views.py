@@ -54,26 +54,8 @@ def search(request):
 
     return render(request,'search2.html')
 
-def analysis(request):
-	data.bank_data.reverse()
-	data.devbank_data.reverse()
-	data.finance_data.reverse()
-	data.hotel_data.reverse()
-	data.hydropower_data.reverse()
-	data.insurance_data.reverse()
-	data.nepse_data.reverse()
-	data.others_data.reverse()
-	context={
-	'bank_data':data.bank_data,
-	'devbank_data':data.devbank_data,
-	'finance_data':data.finance_data,
-	'hotel_data':data.hotel_data,
-	'hydropower_data':data.hydropower_data,
-	'insurance_data':data.insurance_data,
-	'nepse_data':data.nepse_data,
-	'others_data':data.others_data
-	}
-	return render(request, 'khatra.html', context)	 
+def searchpage(request):
+	return render(request, 'searchpage.html')	 
 
 
 def sidebar(request,company_id=0):
@@ -169,15 +151,6 @@ def indicator(request,company_id=0):
 		}
 	return render(request, 'indicator.html', context) 
 
-def make_company_prediction(c_id):
-	close_prediction = []
-	close_prediction = analyzer.analyzeId(c_id)
-	cls_price = Company.objects.get(pk = c_id)
-	cls_price.predicted_price= int(close_prediction[0])
-	
-	if ((cls_price.predicted_price - cls_price.previous_closing_price)>0):
-		cls_price.increased_bool = True 
-	cls_price.save()
 
 def query(name):
 	tbl = rdu.get_data_db(name+'_historical')
