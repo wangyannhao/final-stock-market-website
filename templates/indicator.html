@@ -32,9 +32,9 @@ h3 big{
 </style>
 
 
-<div class="mainbar">
+<div class="mainbar" >
 {% if individual %}
-<h1>{{individual.name}}({{individual.abbr}})</h1>
+<h1 style="font-weight: 700">{{individual.name}}({{individual.abbr}})</h1>
 
 
 <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -443,7 +443,7 @@ h3 big{
 //}
 </script>
 
-
+<!-- <indicator style="margin-left: -120px;"> -->
     <h5><b>Indicator: Bollinger bands</b></h5>
     <div id="chartdiv" style="width:100%; height:400px;"></div>
     <h8><center>Fig1 : Charts showing price, MA, upper and low of {{individual.name}} </center> </h8>
@@ -458,7 +458,7 @@ h3 big{
     <h5><b>Indicator: Directional Movement Index</b></h5>
     <div id="chartdiv3" style="width:100%; height:400px;"></div>
     <h8><center>Fig4 : Charts showing ADX, +DI and -DI of {{individual.name}} </center> </h8>
-    <p>
+    
 
 
 {% endif%}

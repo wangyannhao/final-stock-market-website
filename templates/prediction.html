@@ -29,11 +29,11 @@ h3 big{
   color:#721608;
 }
 
-  </style>
+</style>
 <div class="mainbar">
 {% if individual %}
-<h1>{{individual.name}}({{individual.abbr}})</h1>
-<div class="row">
+<h1 style="margin-left:-60px;font-weight:700">{{company_name.0}}({{company_name.1}})</h1>
+<div class="row" style="margin-left:-70px;width:800px">
     <div class="col-sm-6">
       <p><h5>Closed price of {{individual.abbr}} as of {{individual.yesterday_date}}: </h5> <h3> {{individual.previous_closing_price}}</h3></p>    
     </div>
@@ -46,10 +46,12 @@ h3 big{
         {% endif %}
       </p>
     </div>
+
 </div>    
-
-
-
+<div class="row" style="margin-left:-70px;width:700px">
+    <div id="chartdiv" style="width:100%; height:400px;"></div>
+    <h8><center>Fig : Charts showing high,low and closed prices of {{individual.name}} </center> </h8>
+</div>
 <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>
     <script src="{% static 'js/dataloader.min.js' %}"></script>
@@ -165,8 +167,7 @@ h3 big{
     });
 //}
     </script>
-    <div id="chartdiv" style="width:100%; height:400px;"></div>
-    <h8><center>Fig : Charts showing high,low and closed prices of {{individual.name}} </center> </h8>
+
 
 
 {% endif%}
