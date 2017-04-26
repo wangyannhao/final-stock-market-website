@@ -4,7 +4,7 @@ from yahoo_finance import Share
 import csv
 import MySQLdb
 import pandas as pd
-from datetime import datetime
+from datetime import date,datetime
 import time
 import urllib
 import numpy as np
@@ -13,6 +13,10 @@ import linear_regression as lr
 from ann import predict as predict_ann
 from linear_regression import predict as predict_regression
 from svm_manual import predict as predict_svm
+from django.utils import timezone
+
+date.today().strftime("%Y-%m-%d")
+# print Y,m,d
 
 def store_realtime_in_database(mydb, table,data):
     # data = [Realtime, Price, Volume]
@@ -78,7 +82,7 @@ def create_realtime_table(mydb, table):
     
 def get_historical(stock):
     symbol = Share(stock)
-    stock_data = symbol.get_historical('2016-03-03','2017-03-03')
+    stock_data = symbol.get_historical('2016-01-01',date.today().strftime("%Y-%m-%d"))
     stock_df = pd.DataFrame(stock_data)
     dataFileName = stock + '_historical.csv'
     stock_df.to_csv(dataFileName)
@@ -103,8 +107,8 @@ def get_historical(stock):
     # store_realtime_in_csv(files, data)
 
 def get_realtime_from_url(stock,table):
-    urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv",stock+"_realtime_url.csv")
-    csv_data = stock+"_realtime_url.csv"
+    urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv","static/js/csv/real_time/"+stock+"_realtime_url.csv")
+    csv_data = "static/js/csv/real_time/"+stock+"_realtime_url.csv"
     cursor = mydb.cursor() 
     with open(csv_data) as f:
         reader = csv.reader(f)
@@ -125,8 +129,8 @@ def get_realtime_from_url(stock,table):
 def get_realtime_data(stock_list):
     data_list = []
     for stock in stock_list:
-        urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv",stock+"_realtime_url.csv")
-        csv_data = stock+"_realtime_url.csv"
+        urllib.urlretrieve ("http://finance.yahoo.com/d/quotes.csv?s=" +stock + "&f=sl1d1t1c1ohgv&e=.csv","static/js/csv/real_time/"+stock+"_realtime_url.csv")
+        csv_data = "static/js/csv/real_time/"+stock+"_realtime_url.csv"
         with open(csv_data) as f:
             reader = csv.reader(f)
             for row in reader:
@@ -156,7 +160,7 @@ def collect_data():
     mydb = MySQLdb.connect(host = 'localhost',
            user='root',
            passwd='123456',
-           db='sys')
+           db='test')
    
     stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
     table_realtime = {'AAPL':'AAPL_realtime',
@@ -207,7 +211,7 @@ def get_data_db(table):
     mydb = MySQLdb.connect(host = 'localhost',
        user='root',
        passwd='123456',
-       db='sys')
+       db='test')
     cursor = mydb.cursor()
     cursor.execute("SELECT * from "+table)
     tbl = cursor.fetchall()
@@ -395,16 +399,16 @@ def regression_predict(tbl, predict_range):
     
     return result,close[len(close)-1], date[len(date)-1],date[len(date)-2]
 
-if __name__ == '__main__':
-    # stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
-    # for i in stock:
-    #     bollingerBands(i, 20)
-    #     cal_rsi(i,14)
-    #     cal_dmi(i, 14)
-    # print ann_predict("AMZN_historical", 10)
-    # print svm_predict("AMZN_historical", 10)
-    # print regression_predict("AMZN_historical",100)
-    collect_data()
+# if __name__ == '__main__':
+#     # stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
+#     # for i in stock:
+#     #     bollingerBands(i, 20)
+#     #     cal_rsi(i,14)
+#     #     cal_dmi(i, 14)
+#     # print ann_predict("AMZN_historical", 10)
+#     # print svm_predict("AMZN_historical", 10)
+#     # print regression_predict("AMZN_historical",100)
+#     collect_data()
 
 
 
