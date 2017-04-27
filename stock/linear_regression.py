@@ -2,7 +2,8 @@ from numpy import *
 import numpy
 import math
 
-M = 8
+M = 9
+
 Mp = M + 1
 alpha = 0.005
 beta = 11.1
@@ -131,24 +132,31 @@ def predict(table, range):
     x = len(Datas)+1
     Dlength = len(Datas)
     N = numpy.arange(1,x,1)
+    print len(N),"hahahahha"
     mean = getm(x,Datas,N)
     return mean
 
 def predictLong(table, rrange):
     # long term t
-    distance = len(table) / rrange
 
+    start = len(table) % rrange
+    distance = (len(table)-start) / rrange
+    print distance,"distance ", len(table),'table'
+    # x = len(Datas)+1
+    # N_s = numpy.arange(1,x,1)
     N = []
     Datas = []
     count = 0
-    for i in range(len(table)):
+    for i in range(start, len(table)):
         count = count + 1
         if count % distance == 0:
             Datas.append(table[i])
-            N.append(count/10.0)
+            N.append(i)
     # Datas = table[len(table)-rrange:len(table)]
     x = len(Datas)+1
+    print x,"xxxxxxxxxxxx"
     Dlength = len(Datas)
     # N = numpy.arange(1,x,1)
-    mean = getm(x,Datas,N)
+    mean = getm(x+distance,Datas,N)
+    print len(N),"xixiixixi"
     return mean

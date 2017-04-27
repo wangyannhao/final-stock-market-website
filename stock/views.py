@@ -95,13 +95,13 @@ def sidebar(request,company_id=0):
 		c_id = int (company_id)
 		# p = Company.objects.get(pk=company_id)
 		# print company[c_id][0]
-		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",15)
+		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",80)
 		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',15)
 		svm_pred_long = rdu.svm_predict_long(company[c_id][0]+'_historical',15)
 		# print svm_longterm
 		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",15)
 		ann_pred_long = rdu.ann_predict_long(company[c_id][0]+"_historical",15)
-		pred_long,last_long,tomorrow_long,today_long = rdu.regression_predict_long(company[c_id][0]+"_historical",15)
+		pred_long,last_long,tomorrow_long,today_long = rdu.regression_predict(company[c_id][0]+"_historical",200)
 
 		if (pred-last>0): 
 			delta = 1
@@ -114,17 +114,17 @@ def sidebar(request,company_id=0):
 			delta_long = 0
 
 		vote = 0
-		if (ann_pred_long):
+		if (ann_pred_long==1):
 			vote+=1
-		if (ann_pred):
+		if (ann_pred==1):
 			vote+=1
 		if(pred>last):
 			vote+=1
 		if(pred_long>last):
 			vote+=1
-		if(svm_pred):
+		if(svm_pred==1):
 			vote+=1
-		if(svm_pred_long):
+		if(svm_pred_long==1):
 			vote+=1
 		if (vote==3):
 			suggest = 0
