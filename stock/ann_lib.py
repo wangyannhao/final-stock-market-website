@@ -1,8 +1,5 @@
 import numpy as np
-from sklearn.svm import SVC
-
-
-# predict_range = 50
+from sklearn.neural_network import MLPClassifier
 
 
 def predict(close, predict_range): # input close price and predict range 
@@ -17,12 +14,12 @@ def predict(close, predict_range): # input close price and predict range
     delta[np.where(delta>0)] = 1
     t = delta[len(delta) - predict_range : len(delta)]
     delta_prev = delta[len(delta) - predict_range-1 : len(delta)-1]
-    data = np.arange(1,len(delta),1)/len(delta)
-    x = zip(data, delta_prev)
-    clf = SVC()
+    date = np.arange(1,len(delta),1)/len(delta)
+    x = zip(date, delta_prev)
+    clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
     clf.fit(x, t)
-    print "short term svm acuracy",clf.score(x,t)
-    return clf.predict([data[len(data)-1]+0.1, t[len(t)-1]])[0]
+    print "ANN short term acuracy",clf.score(x, t, sample_weight=None)
+    return clf.predict([1+30/len(delta), t[len(t)-1]])[0]
 
 def predictLong(close, predict_range): # input close price and predict range 
     close_cur = close[1:len(close)]
@@ -33,16 +30,16 @@ def predictLong(close, predict_range): # input close price and predict range
     distance = len(delta) / predict_range
     t = []
     delta_prev = []
-    data = []
+    date = []
     count = 0
     for i in range(len(delta)):
         count = count + 1
         if count % distance == 0:
             t.append(delta[i])
             delta_prev.append(delta[i-1])
-            data.append(count/len(delta))
-    x = zip(data, delta_prev)
-    clf = SVC()
+            date.append(count/len(delta))
+    x = zip(date, delta_prev)
+    clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
     clf.fit(x, t)
-    print "long term svm acuracy",clf.score(x,t)
-    return clf.predict([data[len(data)-1]+1/len(delta), t[len(t)-1]])[0]
+    print "ANN long term acuracy",clf.score(x, t, sample_weight=None)
+    return clf.predict([1+30/len(delta), t[len(t)-1]])[0]

@@ -15,6 +15,7 @@ import retrieve_data_update as rdu
 from yahoo_finance import Share
 import pandas as pd
 import csv,os
+import numpy as np
 from retrieve_data_update import collect_data, getAllIndicators,getHistoryCSV
 #from .stock import neuralNetwork
 
@@ -86,6 +87,9 @@ def searchpage(request):
 
 
 def sidebar(request,company_id=0):
+	vote_up = 0
+	vote_down = 0
+	vote_hold = 0
 	if(company_id==0):
 
 		context={
@@ -96,12 +100,12 @@ def sidebar(request,company_id=0):
 		# p = Company.objects.get(pk=company_id)
 		# print company[c_id][0]
 		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",80)
-		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',15)
+		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',100)
 		svm_pred_long = rdu.svm_predict_long(company[c_id][0]+'_historical',15)
 		# print svm_longterm
-		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",15)
-		ann_pred_long = rdu.ann_predict_long(company[c_id][0]+"_historical",15)
-		pred_long,last_long,tomorrow_long,today_long = rdu.regression_predict(company[c_id][0]+"_historical",200)
+		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",100)
+		ann_pred_long = rdu.ann_predict_long(company[c_id][0]+"_historical",100)
+		pred_long,last_long,tomorrow_long,today_long = rdu.regression_predict_long(company[c_id][0]+"_historical",300)
 
 		if (pred-last>0): 
 			delta = 1
@@ -115,26 +119,47 @@ def sidebar(request,company_id=0):
 
 		vote = 0
 		if (ann_pred_long==1):
-			vote+=1
+			vote+=0.55
+		if (ann_pred_long==-1):
+			vote_down+=0.55
+		if (ann_pred_long==0):
+			vote_hold+=0.55
+
 		if (ann_pred==1):
-			vote+=1
+			vote_up+=0.59
+		if (ann_pred==-1):
+			vote_down+=0.59
+		if (ann_pred==0):
+			vote_hold+=0.59
+
+
 		if(pred>last):
-			vote+=1
+			vote_up+=1
+		if(pred==last):
+			vote_hold+=1
+		if(pred<last):
+			vote_down+=1
+
 		if(pred_long>last):
-			vote+=1
-		if(svm_pred==1):
-			vote+=1
-		if(svm_pred_long==1):
-			vote+=1
-		if (vote==3):
-			suggest = 0
-		elif (vote>3):
-			suggest = 1
-		else:
-			suggest = -1
-		print vote
-		print svm_pred_long,svm_pred,ann_pred,ann_pred_long
-		print suggest
+			vote_up+=0.6
+		if(pred_long==last):
+			vote_hold+=0.6
+		if(pred_long<last):
+			vote_down+=0.6
+
+		if (svm_pred==1):
+			vote_up+=0.7
+		if (svm_pred==-1):
+			vote_down+=0.7
+		if (svm_pred==0):
+			vote_hold+=0.7
+
+		if (svm_pred_long==1):
+			vote_up+=0.7
+		if (svm_pred_long==-1):
+			vote_down+=0.7
+		if (svm_pred_long==0):
+			vote_hold+=0.7
 		context = {
 			'company_name':company[c_id],
 			'id':c_id,
@@ -149,8 +174,76 @@ def sidebar(request,company_id=0):
 			'svm_pred_long':svm_pred_long,
 			'ann_pred_long':ann_pred_long,
 			'delta_long': delta_long,
-			'suggest': suggest
+			# 'suggest': suggest
 		}
+	path = os.getcwd()
+	filepath = path+os.sep+'static'+os.sep+'js'+os.sep+'indicator'
+	os.chdir(filepath)
+	filename = company[int(company_id)][0]
+	#bollinger csv
+	b1csvfile = filename+'_bollinger1.csv'
+	f = open(b1csvfile)
+	lines = f.readlines()[-20:]
+	price_col = []
+	lower_col = []
+	upper_col = []
+	vote = 0
+	for each in lines:
+		each = each.split(',')
+		price = float(each[2])
+		lower = float(each[3])
+		upper = float(each[4][:-1])
+		price_col.append(price)
+		lower_col.append(lower)
+		upper_col.append(upper)
+	price_min = min(price_col)
+	price_max = max(price_col)
+	lower_min = min(lower_col)
+	upper_max = max(upper_col)
+	if price_max<=lower_min:
+		# context['b1_advice'] = 1
+		vote_up+=1
+	elif price_min>=upper_max:
+		# context['b1_advice'] = 2
+		vote_down+=1
+	else:
+		# context['b1_advice'] = 3
+		vote_hold+=1
+	#rsi csv file
+	rsicsvfile = filename+'_rsi.csv'
+	f = open(rsicsvfile)
+	rsi_var = f.readlines()[-1].split(',')[-1]
+	rsi_var = float(rsi_var[:-1])
+	if rsi_var<30:
+		# context['rsi_advice'] = 1
+		vote_up+=1
+	elif rsi_var>70:
+		# context['rsi_advice'] = 2
+		vote_down+=1
+	else:
+		# context['rsi_advice'] = 3
+		vote_hold += 1
+	#dmi csv
+	dmicsvfile = filename+'_dmi.csv'
+	f = open(dmicsvfile)
+	line = f.readlines()[-1].split(',')
+	ADX = float(line[0])
+	DI_minus = float(line[1])
+	DI_plus = float(line[2])
+	if ADX>25:
+		if DI_plus>=DI_minus:
+			vote_up+=0.5
+		else:
+			context['dmi_advice'] = 2
+			vote_down+=0.5
+	else:
+		vote_hold +=0.5
+	suggest = [vote_up, vote_down, vote_hold]
+	option = [1, -1, 0]
+	suggest = np.argmax(suggest)
+	context['suggest'] = option[suggest]
+	os.chdir(path)
+
 	return render(request, 'prediction.html', context) 
 
 def homeindex(request,company_id=28):

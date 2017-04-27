@@ -3,7 +3,7 @@ import random
 import math
 # input_data = [[0,0],[0,0],[1,1],[1,1],[1,1]]
 rate = 0.5
-error_bound = 0.005
+error_bound = 0.01
 node_in = 1
 node_hidden = 3
 node_out = 1
@@ -32,6 +32,7 @@ def activate(x):
 def perceptron_train(input_data, rate, correct):
     final_err = 0.0
     for i in range(len(input_data)):
+        print i
         node_inout = np.zeros((node_hidden, 1))
         node_hiddenout = np.zeros((node_out, 1))
         delta_wi = np.zeros((node_in, node_hidden))
@@ -75,8 +76,8 @@ def predict(close,predict_range=30):
     delta[np.where(delta>0)] = 1
     delta = delta[len(delta) - predict_range : len(delta)]
     t = np.arange(1,len(delta),1)/(len(delta))
-
     input_data = zip(delta, t)
+
     Weight, HiddenWeight = initial()
     count = 0
     while (count <20000):
@@ -88,22 +89,21 @@ def predict(close,predict_range=30):
             break    
     print "ann short term error", error, count
     # start to predict       
-    next_input = [delta[len(delta)-1],1+1/len(close)]
+    next_input = len(delta)+1/len(close)
     node_inout = np.zeros((node_hidden, 1))
     node_hiddenout = np.zeros((node_out, 1))
-    for j in range(node_hidden):
+   for j in range(node_hidden):
         for k in range(node_in):
             node_inout[j][0] += next_input[k] * weight_input[k,j]
         hidden_value[j,0] = activate(node_inout[j,0])
+    
     for j in range(node_out):
             node_hiddenout[j,0] += hidden_value[0,0] * weight_hide[0,j]
     outvalue = activate(node_hiddenout[0,0])
     if (outvalue>0): 
         return 1
-    elif(outvalue<0):
+    else:
         return -1
-    else: 
-        return 0
 
 def predictLong(close,predict_range=30):
     close_cur = close[1:len(close)]

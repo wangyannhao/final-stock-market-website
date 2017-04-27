@@ -2,7 +2,7 @@ from numpy import *
 import numpy
 import math
 
-M = 9
+M = 7
 
 Mp = M + 1
 alpha = 0.005
@@ -132,31 +132,39 @@ def predict(table, range):
     x = len(Datas)+1
     Dlength = len(Datas)
     N = numpy.arange(1,x,1)
-    print len(N),"hahahahha"
+    # print len(N),"hahahahha"
     mean = getm(x,Datas,N)
     return mean
-
-def predictLong(table, rrange):
-    # long term t
-
-    start = len(table) % rrange
-    distance = (len(table)-start) / rrange
-    print distance,"distance ", len(table),'table'
-    # x = len(Datas)+1
-    # N_s = numpy.arange(1,x,1)
-    N = []
-    Datas = []
-    count = 0
-    for i in range(start, len(table)):
-        count = count + 1
-        if count % distance == 0:
-            Datas.append(table[i])
-            N.append(i)
-    # Datas = table[len(table)-rrange:len(table)]
+def predictLong(table, range):
+    Datas = table[len(table)-range:len(table)]
     x = len(Datas)+1
-    print x,"xxxxxxxxxxxx"
     Dlength = len(Datas)
-    # N = numpy.arange(1,x,1)
-    mean = getm(x+distance,Datas,N)
-    print len(N),"xixiixixi"
+    N = numpy.arange(1,x,1)
+    # print len(N),"hahahahha"
+    mean = getm(x+30,Datas,N)
     return mean
+
+# def predictLong(table, rrange):
+#     # long term t
+
+#     start = len(table) % rrange
+#     distance = (len(table)-start) / rrange
+#     # print distance,"distance ", len(table),'table'
+#     # x = len(Datas)+1
+#     # N_s = numpy.arange(1,x,1)
+#     N = []
+#     Datas = []
+#     count = 0
+#     for i in range(start, len(table)):
+#         count = count + 1
+#         if count % distance == 0:
+#             Datas.append(table[i])
+#             N.append(i)
+#     # Datas = table[len(table)-rrange:len(table)]
+#     x = len(Datas)+1
+#     # print x,"xxxxxxxxxxxx"
+#     Dlength = len(Datas)
+#     # N = numpy.arange(1,x,1)
+#     mean = getm(x+distance,Datas,N)
+#     # print len(N),"xixiixixi"
+#     return mean

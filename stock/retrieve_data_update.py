@@ -10,12 +10,12 @@ import urllib
 import numpy as np
 import matplotlib.pyplot as plt
 import linear_regression as lr
-from ann import predict as predict_ann
+from ann_lib import predict as predict_ann
 from linear_regression import predict as predict_regression
 from svm_manual import predict as predict_svm
 from django.utils import timezone
 from svm_manual import predictLong as predict_svm_long
-from ann import predictLong as predict_ann_long
+from ann_lib import predictLong as predict_ann_long
 from linear_regression import predictLong as predict_regression_long
 
 date.today().strftime("%Y-%m-%d")

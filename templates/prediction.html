@@ -20,13 +20,13 @@ h3{
  h3 small{
   font: 18px Arial, Helvetica, sans-serif;
   margin: 0px;
-  color:#08722A;
+  color:green;
 
 }
 h3 big{
   font: 18px Arial, Helvetica, sans-serif;
   margin: 0px;
-  color:#721608;
+  color:red;
 }
 </style>
 
@@ -37,16 +37,18 @@ h3 big{
 </div>
 <div class="col-sm-3">
 <h5 
-    style="margin-top: 60px;
-    font-weight: 700;"
+    style="margin-top: 20px;
+    font: 30px Arial;
+    font-weight: 900;"
+
 >Suggest {% if suggest == 1 %}
-Buy In
+<Down style="color: green; margin-left: 5px">BUY IN</Down>
 {% endif %}
 {% if suggest == -1 %}
-Sell
+<Down style="color: red;margin-left: 5px" >  SELL</Down>
 {%  endif %}
 {% if suggest == 0 %}
-Hold
+<Down style="margin-left: 5px" >  HOLD</Down>
 {% endif %}
  </h5>
 
@@ -63,7 +65,7 @@ Hold
 
     </div>
     </div>
-     <h6 style="font-weight: 600">Short Term Predictions as of tomorrow</h6>
+     <h6 style="font-weight: 600">Short Term Predictions as of tomorrow:</h6>
     <div class="row" >
        <div class="col-sm-4">
       <p><h5>Linear Regression Predicted Price: </h5>
@@ -94,7 +96,7 @@ Hold
       </p>
       </div>
     </div>
-     <h6 style="font-weight: 600">Long Term Predictions as of tomorrow</h6>
+     <h6 style="font-weight: 600">Long Term Predictions: </h6>
     <div class="row" >
        <div class="col-sm-4">
       <p><h5>Linear Regression Predicted Price: </h5>
