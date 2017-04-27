@@ -98,7 +98,42 @@ def predict(close,predict_range=10):
         return 1
     else:
         return -1
-
-# def predict_longterm(close, ):
-
-
+def predictLong(close,predict_range=10):
+    close_cur = close[1:len(close)]
+    close_prev = close[0:len(close)-1]
+    delta = close_cur - close_prev
+    delta[np.where(delta<0)] = (-1)
+    delta[np.where(delta>0)] = 1
+    distance = len(delta) / predict_range
+    t = []
+    newdelta = []
+    count = 0
+    for i in range(len(delta)):
+        count = count + 1
+        if count % distance == 0:
+            newdelta.append(delta[i])
+            t.append(count/10.0)
+    input_data = zip(newdelta, t)
+    Weight, HiddenWeight = initial()
+    count = 0
+    while (count <10000):
+        count += 1
+        error,final_wi,final_wh = perceptron_train(input_data,rate,5)
+        if count==1:
+            firstErr = error
+        if  error < error_bound:
+            break    
+    # start to predict       
+    next_input = len(newdelta)+0.1
+    node_inout = np.zeros((node_hidden, 1))
+    node_hiddenout = np.zeros((node_out, 1))
+    for j in range(node_hidden):
+            node_inout[j][0] += next_input * weight_input[0,j]
+            hidden_value[j,0] = activate(node_inout[j,0])
+    for j in range(node_out):
+            node_hiddenout[j,0] += hidden_value[0,0] * weight_hide[0,j]
+    outvalue = activate(node_hiddenout[0,0])
+    if (outvalue>0): 
+        return 1
+    else:
+        return -1

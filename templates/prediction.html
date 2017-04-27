@@ -32,21 +32,40 @@ h3 big{
 
 <div class="mainbar">
 {% if company_name %}
-<h1 style="margin-left:-60px;font-weight:700">{{company_name.0}} ({{company_name.1}})</h1>
+<div class="col-sm-9">
+<h1 style="margin-left:-70px;font-weight:700">{{company_name.1}} ({{company_name.0}})</h1>
+</div>
+<div class="col-sm-3">
+<h5 
+    style="margin-top: 60px;
+    font-weight: 700;"
+>Suggest {% if suggest == 1 %}
+Buy In
+{% endif %}
+{% if suggest == -1 %}
+Sell
+{%  endif %}
+{% if suggest == 0 %}
+Hold
+{% endif %}
+ </h5>
 
 
-<div class="row" style="margin-left:-70px;width:800px">
+
+
+
+</div>
+
+<div class="row" style="margin-left:-60px;width:800px">
+    <div class="row" >
     <div class="col-sm-6">
       <p><h5>Closed price as of {{today}}: </h5> <h3> {{last}}</h3></p> 
-       <p><h5>Predicted Trend using ANN: </h5>
-        {% if ann_pred %}
-        <h3><small> Will Rise</small></h3>
-        {% else %}
-        <h3> <big>Will Fall</big></h3>
-        {% endif %}
-      </p>  
+
     </div>
-    <div class="col-sm-6">
+    </div>
+     <h6 style="font-weight: 600">Short Term Predictions as of {{tomorrow}}</h6>
+    <div class="row" >
+       <div class="col-sm-4">
       <p><h5>Predicted Price as of {{tomorrow}}: </h5>
         {% if delta %}
         <h3><small> {{pred}}</small></h3>
@@ -54,6 +73,18 @@ h3 big{
         <h3> <big>{{pred}}</big></h3>
         {% endif %}
       </p>
+      </div>
+        <div class="col-sm-4">
+        <p><h5>Predicted Trend using ANN: </h5>
+        {% if ann_pred %}
+        <h3><small> Will Rise</small></h3>
+        {% else %}
+        <h3> <big>Will Fall</big></h3>
+        {% endif %}
+      </p>  
+        </div>
+ 
+    <div class="col-sm-4">
        <p><h5>Predicted Trend using SVM: </h5>
         {% if svm_pred %}
         <h3><small> Will Rise</small></h3>
@@ -61,6 +92,38 @@ h3 big{
         <h3> <big>Will Fall</big></h3>
         {% endif %}
       </p>
+      </div>
+    </div>
+     <h6 style="font-weight: 600">Long Term Predictions as of {{tomorrow}}</h6>
+    <div class="row" >
+       <div class="col-sm-4">
+      <p><h5>Linear Regression Predicted Price: </h5>
+        {% if delta_long %}
+        <h3><small> {{pred_long}}</small></h3>
+        {% else %}
+        <h3> <big>{{pred_long}}</big></h3>
+        {% endif %}
+      </p>
+      </div>
+        <div class="col-sm-4">
+        <p><h5>Predicted Trend using ANN: </h5>
+        {% if ann_pred_long %}
+        <h3><small> Will Rise</small></h3>
+        {% else %}
+        <h3> <big>Will Fall</big></h3>
+        {% endif %}
+      </p>  
+        </div>
+ 
+    <div class="col-sm-4">
+       <p><h5>Predicted Trend using SVM: </h5>
+        {% if svm_pred_long %}
+        <h3><small> Will Rise</small></h3>
+        {% else %}
+        <h3> <big>Will Fall</big></h3>
+        {% endif %}
+      </p>
+      </div>
     </div>
 
 </div>  

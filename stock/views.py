@@ -15,21 +15,41 @@ import retrieve_data_update as rdu
 from yahoo_finance import Share
 import pandas as pd
 import csv,os
+from retrieve_data_update import collect_data, getAllIndicators,getHistoryCSV
 #from .stock import neuralNetwork
 
-company =  {28:['GOOG','Google'],
-			29:['TWTR','Twitter'],
-			30:['AMZN','Amazon'],
-			31:['FB','facebook'],
-			32:['YHOO','Yahoo'],
-			33:['AAPL', 'Apple'],
-			34:['GPRO', 'Go Pro'],
+company =  {28:['GOOG','Alphabet Inc.'],
+			29:['TWTR','Twitter, Inc.'],
+			30:['AMZN','Amazon.com, Inc.'],
+			31:['FB','Facebook, Inc.'],
+			32:['YHOO','Yahoo! Inc.'],
+			33:['AAPL', 'Apple Inc.'],
+			34:['GPRO', 'Go Pro, Inc.'],
 			35:['INTC', 'Intel Corporation'],
-			36:['NFLX', 'Netflix'],
-			37:['TSLA', 'Tesla']
+			36:['NFLX', 'Netflix, Inc.'],
+			37:['TSLA', 'Tesla, Inc.']
 		}
 stock_list = ['GOOG','TWTR', 'AMZN','FB','YHOO','AAPL','GPRO', 'INTC', 'NFLX', 'TSLA' ]
 stock_name = ['Google','Twitter', 'Amazon','Facebook','Yahoo','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
+
+def updateData(request):
+	collect_data()
+	getAllIndicators()
+	getHistoryCSV()
+	c_id = 28
+	avg, high, low, companies = query(company[c_id][0])
+	real_time = rdu.get_realtime_data(stock_list)
+	context = {
+		'id':c_id,
+		'avg':avg,
+		'high':high,
+		'low':low,
+		'companies':companies,
+		'real_time':real_time,
+		'stock_name':stock_name,
+		'company_name':company[c_id]
+	}
+	return render(request,'home.html',context)
 
 def search(request):
 	stock = request.GET.get('put')
@@ -77,12 +97,44 @@ def sidebar(request,company_id=0):
 		# print company[c_id][0]
 		pred, last, tomorrow, today = rdu.regression_predict(company[c_id][0]+"_historical",15)
 		svm_pred = rdu.svm_predict(company[c_id][0]+'_historical',15)
+		svm_pred_long = rdu.svm_predict_long(company[c_id][0]+'_historical',15)
+		# print svm_longterm
 		ann_pred = rdu.ann_predict(company[c_id][0]+"_historical",15)
+		ann_pred_long = rdu.ann_predict_long(company[c_id][0]+"_historical",15)
+		pred_long,last_long,tomorrow_long,today_long = rdu.regression_predict_long(company[c_id][0]+"_historical",15)
 
 		if (pred-last>0): 
 			delta = 1
 		else: 
 			delta = 0
+
+		if (pred_long - last>0):
+			delta_long = 1
+		else:
+			delta_long = 0
+
+		vote = 0
+		if (ann_pred_long):
+			vote+=1
+		if (ann_pred):
+			vote+=1
+		if(pred>last):
+			vote+=1
+		if(pred_long>last):
+			vote+=1
+		if(svm_pred):
+			vote+=1
+		if(svm_pred_long):
+			vote+=1
+		if (vote==3):
+			suggest = 0
+		elif (vote>3):
+			suggest = 1
+		else:
+			suggest = -1
+		print vote
+		print svm_pred_long,svm_pred,ann_pred,ann_pred_long
+		print suggest
 		context = {
 			'company_name':company[c_id],
 			'id':c_id,
@@ -92,7 +144,12 @@ def sidebar(request,company_id=0):
 			'tomorrow':tomorrow,
 			'delta': delta,
 			'svm_pred':svm_pred,
-			'ann_pred':ann_pred
+			'ann_pred':ann_pred,
+			'pred_long':pred_long,
+			'svm_pred_long':svm_pred_long,
+			'ann_pred_long':ann_pred_long,
+			'delta_long': delta_long,
+			'suggest': suggest
 		}
 	return render(request, 'prediction.html', context) 
 
@@ -168,6 +225,7 @@ def indicator(request,company_id=0):
 	price_col = []
 	lower_col = []
 	upper_col = []
+	vote = 0
 	for each in lines:
 		each = each.split(',')
 		price = float(each[2])
@@ -182,8 +240,10 @@ def indicator(request,company_id=0):
 	upper_max = max(upper_col)
 	if price_max<=lower_min:
 		context['b1_advice'] = 1
+		vote+=1
 	elif price_min>=upper_max:
 		context['b1_advice'] = 2
+		vote-=1
 	else:
 		context['b1_advice'] = 3
 	#rsi csv file
@@ -193,8 +253,10 @@ def indicator(request,company_id=0):
 	rsi_var = float(rsi_var[:-1])
 	if rsi_var<30:
 		context['rsi_advice'] = 1
+		vote+=1
 	elif rsi_var>70:
 		context['rsi_advice'] = 2
+		vote-=1
 	else:
 		context['rsi_advice'] = 3
 	#dmi csv
@@ -207,10 +269,19 @@ def indicator(request,company_id=0):
 	if ADX>25:
 		if DI_plus>=DI_minus:
 			context['dmi_advice'] = 1
+			vote+=1
 		else:
 			context['dmi_advice'] = 2
+			vote-=1
 	else:
 		context['dim_advice'] = 3
+	if(vote>0):
+		suggest = 1
+	elif(vote==0):
+		suggest = 0
+	else:
+		suggest = -1
+	context['suggest'] = suggest
 	os.chdir(path)
 	return render(request, 'indicator.html', context) 
 

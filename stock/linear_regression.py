@@ -133,3 +133,22 @@ def predict(table, range):
     N = numpy.arange(1,x,1)
     mean = getm(x,Datas,N)
     return mean
+
+def predictLong(table, rrange):
+    # long term t
+    distance = len(table) / rrange
+
+    N = []
+    Datas = []
+    count = 0
+    for i in range(len(table)):
+        count = count + 1
+        if count % distance == 0:
+            Datas.append(table[i])
+            N.append(count/10.0)
+    # Datas = table[len(table)-rrange:len(table)]
+    x = len(Datas)+1
+    Dlength = len(Datas)
+    # N = numpy.arange(1,x,1)
+    mean = getm(x,Datas,N)
+    return mean

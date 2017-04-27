@@ -33,8 +33,10 @@ hr.myhrline{
 }
 
 h3 {
-  font: 18px Arial, Helvetica, sans-serif;  
-  margin: 0px;
+  font: 14px Arial, Helvetica, sans-serif;  
+  font-weight:700;
+  margin-left: 20px;
+  color:dimgrey;
 }
 
 
@@ -53,7 +55,7 @@ h9 {
 h5 {
   font-size: 0.8em ;
   color:red;
-  margin-top:-1px;
+  margin-top:1px;
 }
 
 
@@ -66,11 +68,19 @@ h7 {
     border-width: 100px;
     color:#721608;
 }
+
+h10 {
+   font: 14px Arial, Helvetica, sans-serif;  
+   font-weight:700;
+   margin-left: 20px;
+   line-height: 30px;
+   color:dimgrey;
+}
 </style>
 
 <div class="row" style="margin-left:-90px;">
     <div class="col-sm-9">
-    <h1 style="font-weight: 700">{{company_name.1}} </h1>
+    <h1 style="font-weight: 700">{{company_name.1}} ({{company_name.0}})</h1>
     <div id='chartdiv' style="width:100%; height:400px;"></div>
     <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>
@@ -185,31 +195,37 @@ h7 {
     });
 //}
 </script>
+
+<hr class="myhrline"/>
       <!-- <h1>{{current_select}} </h1> -->
-	  <div class="row-sm-6">
-		  <p><h5>Highest price in last ten days: </h5> <h3> {{high}}</h3></p>
+    <div class="row-sm-6">
+      <h3>The highest price in last ten days: {{high}}</h3>
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>Average stock price for last year: </h5> <h3> {{avg}}</h3></p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h3>The average stock price for last year: {{avg}}</h3>
       </div>
-	  <div class="row-sm-6">
-		  <p><h5>Lowest stock price for last year: </h5> <h3> {{low}}</h3></p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+      <h3>The lowest stock price for last year: {{low}}</h3>
       </div>
-	  <div class="row-sm-6">
-		  <p>
-		  <h5>Companies with average price lower than lowest price of {{company_name.1}}: </h5>
-		  {% for item in companies %}
-		   <h3> {{item}}</h3>
-		  {% endfor%}
-		  </p>
+      <hr class="myhrline"/>
+    <div class="row-sm-6">
+    
+      <h3>Companies with average price lower than lowest price of {{company_name.1}}: </h3>
+      <h10>{% for item in companies %}
+        {{item}}      
+      {% endfor%}</h10>
+      
       </div>
+            <hr class="myhrline"/>
 	
 </div>
 
 
         <div class="col-sm-3">
     <!--<div class="gadget">-->
-      <h7>Last Update: {{real_time.0.0}}: </h7>
+      <h7>Last Update: {{real_time.0.0}} </h7>
     <hr class="myhrline"/>
     <div class="row-sm-6">
       
