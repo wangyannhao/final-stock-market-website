@@ -1,3 +1,8 @@
+# // written by: Qi Gao, Jiahui Shan, Xin Zhang, Yanhao, Mohan
+# // assisted by:  Qi Gao, Jiahui Shan, Xin Zhang, Yanhao, Mohan
+# // debugged by:
+# // etc. -->
+
 """minor URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

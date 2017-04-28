@@ -1,10 +1,10 @@
 from numpy import *
 import numpy
 import math
-
-# M = 7
-
-# Mp = M + 1
+# // written by: Yanhao Wang
+# // assisted by:  Xin Zhang
+# // debugged by:
+# // etc.
 alpha = 0.005
 beta = 11.1
 

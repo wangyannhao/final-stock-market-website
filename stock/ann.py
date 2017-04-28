@@ -2,6 +2,11 @@ import numpy as np
 import random
 import math
 # input_data = [[0,0],[0,0],[1,1],[1,1],[1,1]]
+ # // written by: Yanhao Wang
+  # // assisted by:  Xin Zhang
+  # // debugged by:
+  # // etc.
+  
 rate = 0.5
 error_bound = 0.005
 node_in = 1

@@ -17,7 +17,10 @@ from django.utils import timezone
 from svm_manual import predictLong as predict_svm_long
 from ann_lib import predictLong as predict_ann_long
 from linear_regression import predictLong as predict_regression_long
-
+# // written by: Yanhao Wang
+# // assisted by:  Xin Zhang
+# // debugged by:
+# // etc.
 date.today().strftime("%Y-%m-%d")
 
 def store_realtime_in_database(mydb, table,data):

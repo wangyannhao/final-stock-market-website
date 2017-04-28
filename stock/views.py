@@ -1,3 +1,8 @@
+#from .stock import neuralNetwork
+# // written by: Yanhao Wang, Jiahui Shan, Mohan Xiao
+# // assisted by:  Yanhao Wang, Jiahui Shan, Mohan Xiao
+# // debugged by:
+# // etc.
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
@@ -17,7 +22,6 @@ import pandas as pd
 import csv,os
 import numpy as np
 from retrieve_data_update import collect_data, getAllIndicators,getHistoryCSV
-#from .stock import neuralNetwork
 
 company =  {28:['GOOG','Alphabet Inc.'],
 			29:['TWTR','Twitter, Inc.'],
@@ -119,47 +123,47 @@ def sidebar(request,company_id=0):
 
 		vote = 0
 		if (ann_pred_long==1):
-			vote+=0.55
+			vote+=0.56159
 		if (ann_pred_long==-1):
-			vote_down+=0.55
+			vote_down+=0.56159
 		if (ann_pred_long==0):
-			vote_hold+=0.55
+			vote_hold+=0.56159
 
 		if (ann_pred==1):
-			vote_up+=0.59
+			vote_up+=0.583
 		if (ann_pred==-1):
-			vote_down+=0.59
+			vote_down+=0.583
 		if (ann_pred==0):
-			vote_hold+=0.59
+			vote_hold+=0.583
 
 
 		if(pred>last):
-			vote_up+=0.8
+			vote_up+=0.96
 		if(pred==last):
-			vote_hold+=0.8
+			vote_hold+=0.96
 		if(pred<last):
-			vote_down+=0.8
+			vote_down+=0.96
 
 		if(pred_long>last):
-			vote_up+=1
+			vote_up+=0.918
 		if(pred_long==last):
-			vote_hold+=1
+			vote_hold+=0.918
 		if(pred_long<last):
-			vote_down+=1
+			vote_down+=0.918
 
 		if (svm_pred==1):
-			vote_up+=0.65
+			vote_up+=0.583
 		if (svm_pred==-1):
-			vote_down+=0.65
+			vote_down+=0.583
 		if (svm_pred==0):
-			vote_hold+=0.65
+			vote_hold+=0.583
 
 		if (svm_pred_long==1):
-			vote_up+=0.8
+			vote_up+=0.5999
 		if (svm_pred_long==-1):
-			vote_down+=0.8
+			vote_down+=0.5999
 		if (svm_pred_long==0):
-			vote_hold+=0.8
+			vote_hold+=0.5999
 		context = {
 			'company_name':company[c_id],
 			'id':c_id,

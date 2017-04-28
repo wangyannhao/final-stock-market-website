@@ -2,9 +2,10 @@ import numpy as np
 from sklearn.svm import SVC
 
 
-# predict_range = 50
-
-
+  # // written by: Yanhao Wang
+  # // assisted by:  Xin Zhang
+  # // debugged by:
+  # // etc.
 def predict(close, predict_range): # input close price and predict range 
 # table = get_data_db("AMZN_historical")
 # close = zip(*table)[1]
