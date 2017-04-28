@@ -2,9 +2,9 @@ from numpy import *
 import numpy
 import math
 
-M = 7
+# M = 7
 
-Mp = M + 1
+# Mp = M + 1
 alpha = 0.005
 beta = 11.1
 
@@ -57,7 +57,7 @@ def chooseFile():
     return Datas,x,Dlength,N
 
 
-def getPhiX(x):
+def getPhiX(x,Mp):
     PhiX = []
     i = 0
     while i < Mp:
@@ -67,12 +67,12 @@ def getPhiX(x):
     return PhiXX
 
 
-def getInvS(N):
+def getInvS(N,Mp):
     I = numpy.ones((Mp, Mp))
     tmp = numpy.zeros((Mp, Mp))
     for n in range(0, len(N)):
 
-        PhiX = getPhiX(N[n])
+        PhiX = getPhiX(N[n],Mp)
         PhiX.shape = (Mp, 1)
         PhiXT = numpy.transpose(PhiX)
         tmp += numpy.dot(PhiX, PhiXT)
@@ -83,18 +83,18 @@ def getInvS(N):
     return InverseS
 
 
-def getm(x,data,N):
+def getm(x,data,N,Mp):
     tmp = numpy.zeros((Mp, 1))
-    PhiX = getPhiX(x)
+    PhiX = getPhiX(x,Mp)
     PhiX.shape = (Mp, 1)
-    InverseS = getInvS(N)
+    InverseS = getInvS(N,Mp)
     S = numpy.linalg.inv(InverseS)
     PhiXT = numpy.transpose(PhiX)
     tmp1 = numpy.dot(PhiXT, S)
     mult = beta * numpy.matrix(tmp1)
     n = 0
     while n < len(N):
-        phiXn = getPhiX(N[n])
+        phiXn = getPhiX(N[n],Mp)
         phiXn.shape = (Mp, 1)
         z = numpy.dot(phiXn, data[n])
         tmp = numpy.add(tmp, z)
@@ -128,20 +128,29 @@ def gets2(x):
 #     print 'Absolute Mean Error is: '+ str(meanErr)
 #     print 'Average Relative Error is: '+ str(relativeErr)
 def predict(table, range):
+    M=10
     Datas = table[len(table)-range:len(table)]
     x = len(Datas)+1
     Dlength = len(Datas)
     N = numpy.arange(1,x,1)
     # print len(N),"hahahahha"
-    mean = getm(x,Datas,N)
+    mean = getm(x,Datas,N,M+1)
     return mean
-def predictLong(table, range):
-    Datas = table[len(table)-range:len(table)]
-    x = len(Datas)+1
-    Dlength = len(Datas)
+def predictLong(table, rrange):
+    M = 1
+    Datas = table[len(table)-rrange:len(table)]
+    sum = 0
+    ma = []
+    for i in range(0,len(Datas)):
+        sum = sum + Datas[i]
+        if ( (i+1) % 7 == 0 ):
+            ma.append(sum/7.0)
+            sum = 0
+    x = len(ma)+1
+    Dlength = len(ma)
     N = numpy.arange(1,x,1)
     # print len(N),"hahahahha"
-    mean = getm(x+30,Datas,N)
+    mean = getm(x+8,ma,N,M+1)
     return mean
 
 # def predictLong(table, rrange):

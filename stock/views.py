@@ -134,32 +134,32 @@ def sidebar(request,company_id=0):
 
 
 		if(pred>last):
-			vote_up+=1
+			vote_up+=0.8
 		if(pred==last):
-			vote_hold+=1
+			vote_hold+=0.8
 		if(pred<last):
-			vote_down+=1
+			vote_down+=0.8
 
 		if(pred_long>last):
-			vote_up+=0.6
+			vote_up+=1
 		if(pred_long==last):
-			vote_hold+=0.6
+			vote_hold+=1
 		if(pred_long<last):
-			vote_down+=0.6
+			vote_down+=1
 
 		if (svm_pred==1):
-			vote_up+=0.7
+			vote_up+=0.65
 		if (svm_pred==-1):
-			vote_down+=0.7
+			vote_down+=0.65
 		if (svm_pred==0):
-			vote_hold+=0.7
+			vote_hold+=0.65
 
 		if (svm_pred_long==1):
-			vote_up+=0.7
+			vote_up+=0.8
 		if (svm_pred_long==-1):
-			vote_down+=0.7
+			vote_down+=0.8
 		if (svm_pred_long==0):
-			vote_hold+=0.7
+			vote_hold+=0.8
 		context = {
 			'company_name':company[c_id],
 			'id':c_id,
@@ -202,13 +202,13 @@ def sidebar(request,company_id=0):
 	upper_max = max(upper_col)
 	if price_max<=lower_min:
 		# context['b1_advice'] = 1
-		vote_up+=1
+		vote_up+=0.5
 	elif price_min>=upper_max:
 		# context['b1_advice'] = 2
-		vote_down+=1
+		vote_down+=0.5
 	else:
 		# context['b1_advice'] = 3
-		vote_hold+=1
+		vote_hold+=0.5
 	#rsi csv file
 	rsicsvfile = filename+'_rsi.csv'
 	f = open(rsicsvfile)
@@ -216,13 +216,13 @@ def sidebar(request,company_id=0):
 	rsi_var = float(rsi_var[:-1])
 	if rsi_var<30:
 		# context['rsi_advice'] = 1
-		vote_up+=1
+		vote_up+=0.5
 	elif rsi_var>70:
 		# context['rsi_advice'] = 2
-		vote_down+=1
+		vote_down+=0.5
 	else:
 		# context['rsi_advice'] = 3
-		vote_hold += 1
+		vote_hold += 0.5
 	#dmi csv
 	dmicsvfile = filename+'_dmi.csv'
 	f = open(dmicsvfile)
@@ -234,7 +234,7 @@ def sidebar(request,company_id=0):
 		if DI_plus>=DI_minus:
 			vote_up+=0.5
 		else:
-			context['dmi_advice'] = 2
+			# context['dmi_advice'] = 2
 			vote_down+=0.5
 	else:
 		vote_hold +=0.5

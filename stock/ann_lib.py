@@ -19,27 +19,29 @@ def predict(close, predict_range): # input close price and predict range
     clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
     clf.fit(x, t)
     print "ANN short term acuracy",clf.score(x, t, sample_weight=None)
-    return clf.predict([1+30/len(delta), t[len(t)-1]])[0]
+    return clf.predict([1+1/len(delta), t[len(t)-1]])[0]
 
 def predictLong(close, predict_range): # input close price and predict range 
-    close_cur = close[1:len(close)]
-    close_prev = close[0:len(close)-1]
+    sum = 0
+    ma = []
+    # date = []
+    for i in range(0,len(close)):
+        sum = sum + close[i]
+        if ( (i+1) % 7 == 0 ):
+            ma.append(sum/7.0)
+            # date.append((i+1))
+            sum = 0
+    close_cur = close[1:len(ma)]
+    close_prev = close[0:len(ma)-1]
     delta = close_cur - close_prev
     delta[np.where(delta<0)] = (-1)
     delta[np.where(delta>0)] = 1
-    distance = len(delta) / predict_range
-    t = []
-    delta_prev = []
-    date = []
-    count = 0
-    for i in range(len(delta)):
-        count = count + 1
-        if count % distance == 0:
-            t.append(delta[i])
-            delta_prev.append(delta[i-1])
-            date.append(count/len(delta))
-    x = zip(date, delta_prev)
+
+    t = delta[1:len(delta)]
+    t_prev = delta[0:len(delta)-1]
+    date = np.arange(1,len(t)+1,1)
+    x = zip(date, t_prev)
     clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
     clf.fit(x, t)
     print "ANN long term acuracy",clf.score(x, t, sample_weight=None)
-    return clf.predict([1+30/len(delta), t[len(t)-1]])[0]
+    return clf.predict([1+60/len(delta), t[len(t)-1]])[0]
