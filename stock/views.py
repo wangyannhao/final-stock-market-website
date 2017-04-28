@@ -206,13 +206,13 @@ def sidebar(request,company_id=0):
 	upper_max = max(upper_col)
 	if price_max<=lower_min:
 		# context['b1_advice'] = 1
-		vote_up+=0.5
+		vote_up+=0.4
 	elif price_min>=upper_max:
 		# context['b1_advice'] = 2
-		vote_down+=0.5
+		vote_down+=0.4
 	else:
 		# context['b1_advice'] = 3
-		vote_hold+=0.5
+		vote_hold+=0.4
 	#rsi csv file
 	rsicsvfile = filename+'_rsi.csv'
 	f = open(rsicsvfile)
@@ -220,13 +220,13 @@ def sidebar(request,company_id=0):
 	rsi_var = float(rsi_var[:-1])
 	if rsi_var<30:
 		# context['rsi_advice'] = 1
-		vote_up+=0.5
+		vote_up+=0.4
 	elif rsi_var>70:
 		# context['rsi_advice'] = 2
-		vote_down+=0.5
+		vote_down+=0.4
 	else:
 		# context['rsi_advice'] = 3
-		vote_hold += 0.5
+		vote_hold += 0.4
 	#dmi csv
 	dmicsvfile = filename+'_dmi.csv'
 	f = open(dmicsvfile)
@@ -236,12 +236,12 @@ def sidebar(request,company_id=0):
 	DI_plus = float(line[2])
 	if ADX>25:
 		if DI_plus>=DI_minus:
-			vote_up+=0.5
+			vote_up+=0.4
 		else:
 			# context['dmi_advice'] = 2
-			vote_down+=0.5
+			vote_down+=0.4
 	else:
-		vote_hold +=0.5
+		vote_hold +=0.4
 	suggest = [vote_up, vote_down, vote_hold]
 	option = [1, -1, 0]
 	suggest = np.argmax(suggest)

@@ -44,4 +44,13 @@ def predictLong(close, predict_range): # input close price and predict range
     clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
     clf.fit(x, t)
     print "ANN long term acuracy",clf.score(x, t, sample_weight=None)
+    sum = 0
+    for i in range (1,8):
+        sum += clf.predict([1+(7*i)/len(delta), t[len(t)-1]])[0]
+    if sum > 0:
+        return 1
+    elif (sum == 0):
+        return 0
+    else:
+        return -1
     return clf.predict([1+60/len(delta), t[len(t)-1]])[0]

@@ -57,5 +57,13 @@ def predictLong(close, predict_range): # input close price and predict range
     clf.fit(x, t)
     # print "long term svm acuracy",clf.score(x,t)
     # print date, len(date)
-    print date[len(date)-1]+8/float(len(date)), date[len(date)-1]
-    return clf.predict([date[len(date)-1]+8/float(len(date)), t[len(t)-1]])[0]
+    sum = 0
+    for i in range (1,8):
+        sum += clf.predict([1+(i)/len(delta), t[len(t)-1]])[0]
+    if sum > 0:
+        return 1
+    elif (sum == 0):
+        return 0
+    else:
+        return -1
+
