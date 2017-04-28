@@ -27,6 +27,6 @@ python manage.py runserver
 ## Screenshots of the website
 
 Home Page: 
-![alt text](final-stock-market-website/Sample Pics/home.png?raw=true "Logo Title Text 1")
+![alt text](Sample Pics/home.png?raw=true "Logo Title Text 1")
 
 
