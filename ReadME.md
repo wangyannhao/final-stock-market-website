@@ -27,6 +27,6 @@ python manage.py runserver
 ## Screenshots of the website
 
 Home Page: 
-![alt text](Sample Pics/home.png?raw=true "Logo Title Text 1")
+![](Sample Pics/home.png?raw=true)
 
 
