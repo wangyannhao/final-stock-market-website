@@ -24,9 +24,4 @@ python manage.py runserver
 
 > Open <http://127.0.0.1:8000/> in browser. 
 
-## Screenshots of the website
-
-Home Page: 
-![](Sample Pics/home.png?raw=true)
-
 
