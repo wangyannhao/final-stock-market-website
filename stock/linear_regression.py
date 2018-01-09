@@ -136,6 +136,7 @@ def predict(table, range):
     # print len(N),"hahahahha"
     mean = getm(x,Datas,N,M+1)
     return mean
+    
 def predictLong(table, rrange):
     M = 1
     Datas = table[len(table)-rrange:len(table)]

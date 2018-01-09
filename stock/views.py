@@ -27,15 +27,15 @@ company =  {28:['GOOG','Alphabet Inc.'],
 			29:['TWTR','Twitter, Inc.'],
 			30:['AMZN','Amazon.com, Inc.'],
 			31:['FB','Facebook, Inc.'],
-			32:['YHOO','Yahoo! Inc.'],
+			32:['AABA','AABA, Inc.'],
 			33:['AAPL', 'Apple Inc.'],
 			34:['GPRO', 'Go Pro, Inc.'],
 			35:['INTC', 'Intel Corporation'],
 			36:['NFLX', 'Netflix, Inc.'],
 			37:['TSLA', 'Tesla, Inc.']
 		}
-stock_list = ['GOOG','TWTR', 'AMZN','FB','YHOO','AAPL','GPRO', 'INTC', 'NFLX', 'TSLA' ]
-stock_name = ['Google','Twitter', 'Amazon','Facebook','Yahoo','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
+stock_list = ['GOOG','TWTR', 'AMZN','FB','AABA','AAPL','GPRO', 'INTC', 'NFLX', 'TSLA' ]
+stock_name = ['Google','Twitter', 'Amazon','Facebook','AABA','Apple','Go Pro', 'Intel Corporation', 'Netflix', 'Tesla']
 
 def updateData(request):
 	collect_data()

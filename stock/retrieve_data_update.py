@@ -17,6 +17,9 @@ from django.utils import timezone
 from svm_manual import predictLong as predict_svm_long
 from ann_lib import predictLong as predict_ann_long
 from linear_regression import predictLong as predict_regression_long
+
+import urllib2
+from BeautifulSoup import BeautifulSoup as bs
 # // written by: Yanhao Wang
 # // assisted by:  Xin Zhang
 # // debugged by:
@@ -48,12 +51,17 @@ def store_historical_in_database(mydb, csv_data, table):
     filepath = path+'/static/js/csv'
     os.chdir(filepath)
     print os.getcwd()
+    i = 0
     with open(csv_data) as f:
         reader = csv.reader(f)
         for row in reader:
             #adj = double(row[1])
+            if i == 0:
+                i = i+1
+                continue
+            # i = i+1
             insert_stmt = (
-                    "INSERT INTO " + table +"(Adj_Close, Close_price, Date_time, High_price, Low_price, Open_price, Stock_name, Volume)"
+                    "INSERT INTO " + table +"(Adj_Close, Close_price, Date_time, High_price, Low_price, Stock_name, Open_price, Volume)"
                     "VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
                     )
             cursor.execute(insert_stmt, row[1:9])
@@ -89,18 +97,51 @@ def create_realtime_table(mydb, table):
     mydb.commit()
     cursor.close()
     
-def get_historical(stock):
-    symbol = Share(stock)
-    stock_data = symbol.get_historical('2016-01-01',date.today().strftime("%Y-%m-%d"))
-    stock_df = pd.DataFrame(stock_data)
-    dataFileName = 'static/js/csv/'+stock + '_historical.csv'
+def get_historical(name):
+    url = "https://finance.yahoo.com/quote/" + name + "/history/"
+    stock_data = bs(urllib2.urlopen(url).read()).findAll('table')[0].tbody.findAll('tr')
+
+    stock_df = pd.DataFrame({'Name':[],'Date':[],'Open':[],'High':[],'Low':[],'Close':[],'Adj_Close':[],'Volume':[]})
+    data1 = []
+    data2 = []
+    data3 = []
+    data4 = []
+    data5 = []
+    data6 = []
+    data7 = []
+    data8 = []
+    for row in stock_data:
+        divs = row.findAll('td')
+        # print divs
+        if divs[1].span.text != 'Dividend':
+            data1.append(divs[0].span.text)
+            data2.append(divs[1].span.text.replace(',',''))
+            data3.append(divs[2].span.text.replace(',',''))
+            data4.append(divs[3].span.text.replace(',',''))
+            data5.append(divs[4].span.text.replace(',',''))
+            data6.append(divs[5].span.text.replace(',',''))
+            data7.append(divs[6].span.text.replace(',',''))
+            data8.append(name)
+    stock_df['Date'] = data1
+    stock_df['Open'] = data2
+    stock_df['High'] = data3
+    stock_df['Low'] = data4
+    stock_df['Close'] = data5
+    stock_df['Adj_Close'] = data6
+    stock_df['Volume'] = data7
+    stock_df['Name'] = data8
+
+    # symbol = Share(name)
+    # stock_data = symbol.get_historical('2016-01-01',date.today().strftime("%Y-%m-%d"))
+    # stock_df = pd.DataFrame(stock_data)
+    dataFileName = 'static/js/csv/'+name + '_historical.csv'
     stock_df.to_csv(dataFileName)
     temp = pd.DataFrame({'Close_Price':[],'Low':[],'High':[],'Date':[]})
     temp['Date'] = stock_df['Date']
     temp['High'] = stock_df['High']
     temp['Low'] = stock_df['Low']
     temp['Close_Price'] = stock_df['Adj_Close']
-    dataFileName = stock +'.csv'
+    dataFileName = name +'.csv'
     temp.to_csv('static/js/csv/'+dataFileName,index_label=False,index=False)
 
 # def get_realtime_data(stock,mydb,table):
@@ -170,7 +211,7 @@ def collect_data():
            passwd='123456',
            db='test')
    
-    stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'YHOO']
+    stock = ['AAPL', 'AMZN', 'FB', 'GOOG', 'GPRO', 'INTC', 'NFLX', 'TSLA', 'TWTR', 'AABA']
     table_realtime = {'AAPL':'AAPL_realtime',
                   'AMZN':'AMZN_realtime',
                   'FB':'FB_realtime',
@@ -180,7 +221,7 @@ def collect_data():
                   'NFLX':'NFLX_realtime',
                   'TSLA':'TSLA_realtime',
                   'TWTR':'TWTR_realtime',
-                  'YHOO':'YHOO_realtime'}
+                  'AABA':'AABA_realtime'}
     table_historical = {'AAPL':'AAPL_historical',
                   'AMZN':'AMZN_historical',
                   'FB':'FB_historical',
@@ -190,7 +231,7 @@ def collect_data():
                   'NFLX':'NFLX_historical',
                   'TSLA':'TSLA_historical',
                   'TWTR':'TWTR_historical',
-                  'YHOO':'YHOO_historical'}
+                  'AABA':'AABA_historical'}
     
     for i in range(len(stock)):
         if historical:
@@ -260,7 +301,7 @@ def getHighest(data):
 def getCompanies(tbl):
     data = get_data_db(tbl)
     low = getLowest(data)
-    table_historical = {'GOOG','YHOO','FB','AMZN','TWTR','GPRO','INTC','NFLX','TSLA'}
+    table_historical = {'GOOG','AABA','FB','AMZN','TWTR','GPRO','INTC','NFLX','TSLA'}
     companies = []
     for c in table_historical:
         tmp = getAverage(get_data_db(c+'_historical'))
@@ -271,7 +312,9 @@ def getCompanies(tbl):
     
 def bollingerBands(tbl, dur = 20):
     whole = get_data_db(tbl)
+    print "len:",len(whole)
     close = zip(*whole)[2]
+    print close
     close = np.asarray(map(float,close[0:len(close)-1]))
     Date = zip(*whole[0:len(whole)-1])[0]
     data = {'price': close}
@@ -433,14 +476,15 @@ def regression_predict_long(tbl, predict_range):
     return result,close[len(close)-1], date[len(date)-1],date[len(date)-2]
      
 def getAllIndicators():
-    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
+    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'AABA_historical']
     for i in stock:
+    	print "this is ", i
         bollingerBands(i, 20)
         cal_rsi(i,14)
         cal_dmi(i, 14)
 
 def getHistoryCSV():
-    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'YHOO_historical']
+    stock = ['AAPL_historical', 'AMZN_historical', 'FB_historical', 'GOOG_historical', 'GPRO_historical', 'INTC_historical', 'NFLX_historical', 'TSLA_historical', 'TWTR_historical', 'AABA_historical']
     for i in stock:
         name = i.split('_')[0]
         get_historical(name)
