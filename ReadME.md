@@ -1,4 +1,4 @@
-![alt text](https://github.com/wangyannhaofinal-stock-market-website/samplePics/home.png "home")
+![alt text](https://github.com/wangyannhao/final-stock-market-website/samplePics/home.png "home")
 
 ## System Requirements:
 
