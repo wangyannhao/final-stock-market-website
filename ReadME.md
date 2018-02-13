@@ -1,4 +1,4 @@
-![alt text](../master/final-stock-market-website/samplePics/home.png "home")
+![alt text](/final-stock-market-website/samplePics/home.png "home")
 
 ## System Requirements:
 
