@@ -1,3 +1,5 @@
+![alt text](https://github.com/wangyannhaofinal-stock-market-website/samplePics/home.png "home")
+
 ## System Requirements:
 
 Find here for how to install django: 
